@@ -1,3 +1,17 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: all 0.3s ease;
+}
+
+
 /* 全局变量 */
 :root {
     --body-color: #E4E9F7;
@@ -17,17 +31,8 @@
     --text-color: #ccc;
 }
 
-/* 基础样式 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-}
-body {
-    min-height: 100vh;
-    background-color: var(--body-color);
-    transition: all 0.3s ease;
+header {
+    position: relative;
 }
 
 /* 侧边栏样式 */
@@ -60,6 +65,27 @@ body {
     opacity: 0;
 }
 
+.image-text {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    margin-top: 2px;
+    font: 600 18px;
+}
+
+.something {
+    font-size: 20px;
+    margin-top: -2px;
+    display: block;
+}
+
 /* 菜单项样式 */
 .shell li {
     height: 50px;
@@ -68,6 +94,8 @@ body {
     align-items: center;
     margin-top: 10px;
 }
+
+
 .icon {
     min-width: 60px;
     border-radius: 6px;
@@ -81,10 +109,43 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+.image {
+    min-width: 60px;
+    border-radius: 6px;
+}
 .image img {
     width: 45px;
     border-radius: 6px;
 }
+
+.toggle {
+    position: absolute;
+    top: 50%;
+    right: -25px ;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--shell-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle {
+    color: #ccc;
+
+}
+
+.shell.close .toggle {
+    transform: translateY(-50%) rotate(0deg);
+}
+
 
 /* 搜索框样式 */
 .search-box {
@@ -107,6 +168,10 @@ body {
 }
 
 /* 菜单栏滚动条隐藏 */
+
+.menu {
+    margin-top: 40px;
+}
 .menu-bar {
     height: calc(100% - 55px);
     display: flex;
@@ -117,6 +182,8 @@ body {
 .menu-bar::-webkit-scrollbar {
     display: none;
 }
+
+
 
 /* 主题切换 */
 .toggle-switch {
@@ -132,7 +199,7 @@ body {
 }
 .switch {
     position: relative;
-    height: 22px;
+    height: 26px;
     width: 40px;
     border-radius: 25px;
     background-color: var(--toggle-color);
@@ -162,16 +229,20 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
+    width: 100%;
     border-radius: 6px;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 .shell li a:hover {
     background-color: var(--primary-color);
 }
-.shell li a:hover .icon, .shell li a:hover .text {
+.shell li a:hover .icon, 
+.shell li a:hover .text {
     color: var(--shell-color);
 }
-.dark .shell li a:hover .icon, .dark .shell li a:hover .text {
+.dark .shell li a:hover .icon, 
+.dark .shell li a:hover .text {
     color: #ccc;
 }
 
@@ -180,8 +251,9 @@ body {
     position: relative;
 }
 .mode .sun-moon {
-    height: 50px;
+    height: 20px;
     width: 60px;
+    
 }
 .mode .sun-moon i {
     position: absolute;
@@ -189,9 +261,14 @@ body {
 .mode .sun-moon i.sun {
     opacity: 0;
 }
+
 .dark .mode .sun-moon i.sun {
     opacity: 1;
 }
 .dark .mode .sun-moon i.moon {
     opacity: 0;
 }
+
+
+
+
