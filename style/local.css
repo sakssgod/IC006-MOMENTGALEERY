@@ -30,3 +30,24 @@ select{
   
 
 }
+
+button {
+    background-color:#008cba;
+    color: white;
+    border: 2px solid green;
+    padding: 13px 65px;
+    border-radius: 15px;
+    display: block;
+    margin: 45px auto;
+  }
+  
+button:hover{
+    background-color:white; /* Green */
+    color: black;
+    transform: scale(1.3);
+    transition: background-color 0.7s ease, transform 0.8s ease-in-out;
+    
+}
+a{
+    text-decoration: none;
+}
