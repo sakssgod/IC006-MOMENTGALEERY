@@ -64,3 +64,14 @@ button:hover{
     color: black;
     
 }
+
+a{
+    text-decoration: none;
+    color:black;
+}
+a:hover{
+    color: aqua;
+}
+a:visited{
+    color: red;
+}
