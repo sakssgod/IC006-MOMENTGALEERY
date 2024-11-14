@@ -28,7 +28,6 @@ button {
     padding: 13px 35px;
     border-radius: 15px;
     display: block;
-    margin: 45px auto;
   }
   
 button:hover{
@@ -40,4 +39,9 @@ button:hover{
 }
 a{
     text-decoration: none;
+}
+
+.return{
+    width: 120px;
+    margin: 0 auto;
 }
