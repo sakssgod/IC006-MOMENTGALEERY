@@ -1,0 +1,125 @@
+/* 设置页面样式 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f5;
+}
+
+/* 上传区域的样式 */
+.upload-container {
+    text-align: center;
+    padding: 100px;
+    border: 2px dashed #d9d9d9;
+    border-radius: 10px;
+    width: 350px;
+    background-color: white;
+    position: relative;
+    cursor: pointer;
+    
+}
+
+.upload-container:hover {
+    border-color: #3399ff;
+}
+
+/* 上传图标样式 */
+.upload-icon {
+    font-size: 48px;
+    color: #999;
+}
+
+/* 上传提示文字样式 */
+.upload-text {
+    font-size: 16px;
+    color: #666;
+    margin: 20px 
+}
+
+/* 上传按钮样式 */
+
+/* 图片预览容器 */
+.preview-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* 预览图片样式 */
+.preview-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+}
+
+/* 隐藏文件输入框 */
+input[type="file"] {
+    display: none;
+}
+
+
+/* 上传按钮组 */
+.upload-button-group {
+    display: inline-flex;
+    align-items: center;
+    height: 35px;
+    width: 200px;
+
+}
+
+.upload-button {
+    background-color: #3399ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px; /* 添加右边距 */
+    height: 100%;
+    width: 75%;
+}
+
+.dropdown-arrow {
+    background-color: #3399ff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 100%;
+    width: 25%;
+}
+
+
+.dropdown-menu {
+    display: none; /* 初始隐藏 */
+    position: absolute;
+    width: 200px; /* 与 upload-button-group 一致 */
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 5px 0;
+    margin-top: 40%;
+}
+
+.dropdown-item {
+    padding: 10px;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f5;
+}

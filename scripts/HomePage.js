@@ -19,8 +19,8 @@ searchBtn.addEventListener("click", () => {
 modeSwitch.addEventListener("click", () => {
     body.classList.toggle("dark");
     if (body.classList.contains("dark")) {
-        modeText.innerText = "白日模式";
+        modeText.innerText = "Light Mode";
     } else {
-        modeText.innerText = "夜间模式";
+        modeText.innerText = "Dark Mode";
     }
 });
