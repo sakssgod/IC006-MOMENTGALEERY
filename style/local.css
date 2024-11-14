@@ -1,0 +1,12 @@
+h1{
+    text-align: center;
+
+}
+
+select{
+    display: block;
+    margin: 0 auto;
+    padding: 15px 7px;
+    border: 1px solid rgb(20, 174, 20);
+    font-size: 110%;
+}
