@@ -5,7 +5,7 @@
 
 
 .outer-frame {
-    width: 800px; /* 设置宽度 */
+    width: 765px; /* 设置宽度 */
     height: 500px; /* 设置固定高度 */
     border: 2px dashed #333; /* 边框样式 */
     border-radius: 10px;
