@@ -199,7 +199,7 @@ header {
 }
 .switch {
     position: relative;
-    height: 26px;
+    height: 28px;
     width: 40px;
     border-radius: 25px;
     background-color: var(--toggle-color);
