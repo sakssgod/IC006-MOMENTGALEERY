@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Interface</title>
+    <style>
+        /* 外部容器 */
+        .filter-container {
+            width: 250px;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        /* 筛选项样式 */
+        .filter-section {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+
+        .filter-header {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .filter-options {
+            margin-top: 5px;
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .filter-options li {
+            margin-bottom: 5px;
+        }
+
+        /* 隐藏的选项 */
+        .hidden-option {
+            display: none;
+        }
+
+        .show-toggle {
+            color: #0073e6;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: inline-block;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        Definir os criterios:
+    </div>
+<div class="filter-container">
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+    <div class="filter-section">
+        <div class="filter-header">Brands</div>
+        <ul class="filter-options">
+            <li><input type="checkbox"> Asus</li>
+            <li><input type="checkbox"> Apple</li>
+            <li><input type="checkbox"> Samsung</li>
+            <li><input type="checkbox"> HP</li>
+            <li><input type="checkbox"> Lenovo</li>
+            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+            <li class="hidden-option"><input type="checkbox"> HP</li>
+            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+        </ul>
+        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+        <hr>
+    </div>
+</div>
+
+
+
+<script>
+    function toggleOptions() {
+        const hiddenOptions = document.querySelectorAll('.hidden-option');
+        const showToggle = document.querySelector('.show-toggle');
+        
+        hiddenOptions.forEach(option => {
+            option.style.display = option.style.display === 'none' ? 'block' : 'none';
+        });
+        
+        if (showToggle.innerText === 'Show more') {
+            showToggle.innerText = 'Show less';
+        } else {
+            showToggle.innerText = 'Show more';
+        }
+    }
+
+    // 初始隐藏选项
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.hidden-option').forEach(option => {
+            option.style.display = 'none';
+        });
+    });
+</script>
+
+</body>
+</html>
