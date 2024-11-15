@@ -5,12 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Interface</title>
     <style>
+
+        /* 整体布局 */
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+
+        .outer-shell {
+            width: 272px;
+            height: 550px;
+        }
+        .nomeC {
+            width: auto;
+            height: 60px;
+            border: 1px solid #ddd;
+            border-radius: 10px 0px 0px 0px;
+            padding-left: 15px;
+        }
         /* 外部容器 */
         .filter-container {
             width: 250px;
-            height: 500px;
+            height: 450px;
             border: 1px solid #ddd;
-            border-radius: 10px;
+            border-radius: 0px 0px 0px 10px;
             overflow-y: auto;
             padding: 10px;
         }
@@ -57,141 +75,210 @@
             border-top: 1px solid #ddd;
             margin: 10px 0;
         }
+
+        .lks123 {
+            width: 100%;
+            height: 550px;
+        }
+
+
+        /* 产品列表容器 */
+        .product-list {
+            width: 530px;
+            height: 450px;
+            border: 1px solid #ddd;
+            border-radius: 0px 0px 10px ;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+         /* 产品项样式 */
+         .product-item {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .product-image {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #aaa;
+        }
+
+        .product-image img{
+            width: 50px;
+            height: 50px;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 排序栏 */
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 0px 10px 0px 0px;
+            width: 530px;
+            height: 60px;
+            padding-left: 20px;
+        }
+
+        .product-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .sort-options {
+            font-size: 14px;
+            color: #0073e6;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div>
         Definir os criterios:
     </div>
-<div class="filter-container">
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
+
+<div class="container">
+
+    <div class="outer-shell">
+        <div class="nomeC">
+            <h3>Select criterios</h3>
+        </div>
+
+        <div class="filter-container">
+            <div class="filter-section">
+                <div class="filter-header">Brands</div>
+                <ul class="filter-options">
+                    <li><input type="checkbox"> Asus</li>
+                    <li><input type="checkbox"> Apple</li>
+                    <li><input type="checkbox"> Samsung</li>
+                    <li><input type="checkbox"> HP</li>
+                    <li><input type="checkbox"> Lenovo</li>
+                    <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
+                    <li class="hidden-option"><input type="checkbox"> HP</li>
+                    <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
+                </ul>
+                <div class="show-toggle" onclick="toggleOptions()">Show more</div>
+                <hr>
+            </div>
+            
+        </div>
+
+        
+
+        
+
     </div>
 
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
-    </div>
+    <div class="lks123">
+        <div class="product-header">
+            <h3>97 items found</h3>
+            <div class="sort-options">Sort by <span>Popularity</span></div>
+        </div>
 
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
-    </div>
+        <!-- 右侧产品列表区域 -->
+        <div class="product-list">
 
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
-    </div>
+            
+            <!-- 产品项 -->
+            <div class="product-item">
+                <div class="product-image">📷</div>
+                <div class="product-info">
+                    <div class="product-name">img321312321.png</div>
+                    <div class="product-price">4.23MB</div>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <div class="product-image"><img src="../Images/dragao.png" alt=""></div>
+                <div class="product-info">
+                    <div class="product-name">img muito bem.png</div>
+                    <div class="product-price">34.2MB</div>
+                </div>
+            </div>
 
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
-    </div>
+            <div class="product-item">
+                <div class="product-image">📷</div>
+                <div class="product-info">
+                    <div class="product-name">img321312321.png</div>
+                    <div class="product-price">4.23MB</div>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <div class="product-image"><img src="../Images/dragao.png" alt=""></div>
+                <div class="product-info">
+                    <div class="product-name">img muito bem.png</div>
+                    <div class="product-price">34.2MB</div>
+                </div>
+            </div>
 
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
-    </div>
+            <div class="product-item">
+                <div class="product-image">📷</div>
+                <div class="product-info">
+                    <div class="product-name">img321312321.png</div>
+                    <div class="product-price">4.23MB</div>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <div class="product-image"><img src="../Images/dragao.png" alt=""></div>
+                <div class="product-info">
+                    <div class="product-name">img muito bem.png</div>
+                    <div class="product-price">34.2MB</div>
+                </div>
+            </div>
 
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
-    </div>
-    <div class="filter-section">
-        <div class="filter-header">Brands</div>
-        <ul class="filter-options">
-            <li><input type="checkbox"> Asus</li>
-            <li><input type="checkbox"> Apple</li>
-            <li><input type="checkbox"> Samsung</li>
-            <li><input type="checkbox"> HP</li>
-            <li><input type="checkbox"> Lenovo</li>
-            <li class="hidden-option"><input type="checkbox"> Xiaomi</li>
-            <li class="hidden-option"><input type="checkbox"> HP</li>
-            <li class="hidden-option"><input type="checkbox"> Dashdiasudha</li>
-        </ul>
-        <div class="show-toggle" onclick="toggleOptions()">Show more</div>
-        <hr>
+            <div class="product-item">
+                <div class="product-image">📷</div>
+                <div class="product-info">
+                    <div class="product-name">img321312321.png</div>
+                    <div class="product-price">4.23MB</div>
+                </div>
+            </div>
+            
+            <div class="product-item">
+                <div class="product-image"><img src="../Images/dragao.png" alt=""></div>
+                <div class="product-info">
+                    <div class="product-name">img muito bem.png</div>
+                    <div class="product-price">34.2MB</div>
+                </div>
+            </div>
+            
+            <!-- 你可以复制更多产品项 -->
+            
+        </div>
     </div>
 </div>
-
 
 
 <script>
