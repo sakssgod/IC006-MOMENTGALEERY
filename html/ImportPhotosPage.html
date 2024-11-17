@@ -6,14 +6,15 @@
     <title>图片上传示例</title>
     <link rel="stylesheet" href="../style/ImportPhotosPage.css"> <!-- 引入外部 CSS 文件 -->
     <link rel="stylesheet" href="../IconFiles/jiantou/iconfont.css">
+    
 </head>
 <body>
 
-<div class="upload-container" onclick="document.getElementById('fileInput').click()">
+<div class="upload-container" onclick="document.getElementById('fileExplorer').style.display='flex'">
     <div class="upload-icon">+</div>
     <div class="upload-text">拖放或点击打开图片</div>
     <div class="upload-button-group">
-        <button class="upload-button" onclick="document.getElementById('fileInput').click()">打开图片</button>
+        <button class="upload-button" onclick="event.stopPropagation(); document.getElementById('fileExplorer').style.display='flex'">打开图片</button>
         <button class="dropdown-arrow" onclick="toggleDropdown(event)">
             <i class="iconfont icon-arrow-down toggle"></i>
         </button>
@@ -25,13 +26,52 @@
             <div class="dropdown-item" onclick="importFromDropbox()">From Facebook</div>
         </div>
     </div>
-
-    <input type="file" id="fileInput" accept="image/*" multiple onchange="previewImages(event)">
 </div>
 
-<div class="preview-container" id="previewContainer">
-    <!-- 图片预览区域 -->
+<div class="file-explorer" id="fileExplorer">
+    <!-- Top Navigation Bar -->
+    <div class="top-bar">
+        <button class="nav-button">Back</button>
+        <button class="nav-button">Forward</button>
+        <button class="nav-button">Refresh</button>
+        <button class="close-button" onclick="document.getElementById('fileExplorer').style.display='none'">X</button>
+    </div>
+
+    <div class="file-display">
+        <!-- Home Column -->
+        <div class="home-column">
+            <div class="home-item">Home</div>
+            <div class="home-item">Desktop</div>
+            <div class="home-item">Documents</div>
+            <div class="home-item">Downloads</div>
+            <div class="home-item">Music</div>
+            <div class="home-item">Pictures</div>
+            <div class="home-item">Videos</div>
+        </div>
+
+        <!-- File List -->
+        <div class="outer-file">
+            <div class="file-list">
+                <div class="file-list2">
+                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Desktop</div>
+                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Documents</div>
+                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Downloads</div>
+                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Music</div>
+                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Pictures</div>
+                    <div class="file-item"><img src="file-icon.png" alt="File"><br>.bashrc</div>
+                    <div class="file-item"><img src="file-icon.png" alt="File"><br>.profile</div>
+                    <div class="file-item"><img src="file-icon.png" alt="File"><br>example.txt</div>
+                </div>
+            </div>
+
+            <div class="bottom-open-cancele">
+                <button class="bottom-button">open</button>
+                <button class="bottom-button">cancele</button>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <script src="../scripts/ImportarPhotos.js"></script> <!-- 引入外部 JavaScript 文件 -->
 </body>

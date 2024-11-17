@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux File Explorer Mockup</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #f5f5f5;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .file-explorer {
+            width: 650px;
+            height: 500px;
+            background-color: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        .top-bar .nav-button {
+            background-color: #555;
+            border: none;
+            color: #f5f5f5;
+            padding: 5px 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .top-bar .nav-button:hover {
+            background-color: #666;
+        }
+
+        /* Home column */
+        .home-column {
+            width: 25%;
+            background-color: #3b3b3b;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .home-column .home-item {
+            padding: 10px;
+            background-color: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            color: #f5f5f5;
+        }
+
+        .home-column .home-item:hover {
+            background-color: #666;
+        }
+
+        /* File display column */
+        .file-display {
+            flex-grow: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .outer-file {
+            width: 80%;
+        }
+
+        .file-list {
+            width: auto;
+            height: 80%;
+            padding: 15px;
+            display: flex;
+            background-color: #222;
+            overflow-y: auto;
+            align-items: flex-start;
+        }
+
+        .file-list2 {
+            display: flex;
+            align-items: flex-start;
+            position: relative; /* Enable absolute positioning for icons */
+            padding: 10px; /* Add padding to keep icons inside */
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .file-list .file-item {
+            width: 60px;
+            text-align: center;
+            color: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .file-list .file-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .file-list .file-item:hover {
+            opacity: 0.8;
+        }
+
+                /* Bottom open and cancel buttons */
+                .bottom-open-cancele {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .bottom-open-cancele .bottom-button {
+            background-color: #444;
+            color: #f5f5f5;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .bottom-open-cancele .bottom-button:hover {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="file-explorer">
+        <!-- Top Navigation Bar -->
+        <div class="top-bar">
+            <button class="nav-button">Back</button>
+            <button class="nav-button">Forward</button>
+            <button class="nav-button">Refresh</button>
+        </div>
+
+        <div class="file-display">
+            <!-- Home Column -->
+            <div class="home-column">
+                <div class="home-item">Home</div>
+                <div class="home-item">Desktop</div>
+                <div class="home-item">Documents</div>
+                <div class="home-item">Downloads</div>
+                <div class="home-item">Music</div>
+                <div class="home-item">Pictures</div>
+                <div class="home-item">Videos</div>
+            </div>
+            
+            <!-- File List -->
+            <div class="outer-file">
+                <div class="file-list">
+                    <div class="file-list2">
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Desktop</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Documents</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Downloads</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Music</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Pictures</div>
+                        <div class="file-item"><img src="file-icon.png" alt="File"><br>.bashrc</div>
+                        <div class="file-item"><img src="file-icon.png" alt="File"><br>.profile</div>
+                        <div class="file-item"><img src="file-icon.png" alt="File"><br>example.txt</div>               
+                    </div>
+                    
+                </div>
+
+                <div class="bottom-open-cancele">
+                    <button class="bottom-button">open</button>
+                    <button class="bottom-button">cancele</button>
+                </div>
+            </div>
+ 
+        </div>
+    </div>
+</body>
+</html>
