@@ -24,3 +24,17 @@ modeSwitch.addEventListener("click", () => {
         modeText.innerText = "Dark Mode";
     }
 });
+
+document.querySelectorAll('.nav-link a').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetPage = link.getAttribute('data-target');
+        if (targetPage) {
+            // 获取主内容区域的 iframe 并更改其 src 属性
+            const mainContentIframe = window.parent.document.querySelector('.main-content iframe');
+            if (mainContentIframe) {
+                mainContentIframe.src = targetPage;
+            }
+        }
+    });
+});
