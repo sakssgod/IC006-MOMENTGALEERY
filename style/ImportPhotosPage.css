@@ -9,13 +9,17 @@ body {
     background-color: #f0f0f5;
 }
 
+.big-outer-shell {
+
+}
+
 .upload-container {
     text-align: center;
     padding: 100px;
     border: 2px dashed #d9d9d9;
     border-radius: 10px;
     width: 350px;
-    background-color: white;
+    background-color: #E4E9F7;
     position: relative;
     cursor: pointer;
 }
@@ -228,4 +232,139 @@ body {
 
 .bottom-open-cancele .bottom-button:hover {
     background-color: #555;
+}
+
+
+.navbar {
+    width: 170px;
+    height: 600px;
+    max-width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; /* 设置固定定位 */
+    top: 50%; /* 顶部偏移 50% */
+    right: 0; /* 靠右对齐 */
+    transform: translateY(-50%); /* 使其垂直居中 */
+    z-index: 1000; /* 保证在其他元素之上 */
+}
+
+.outer-shell {
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+
+}
+
+.navbar-top {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    height: 500px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+
+}
+
+
+
+.thumbnail {
+    width: 100%;
+    height: 100px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.open-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+}
+
+.open-button:hover {
+    background-color: #0056b3;
+}
+
+.outer-shell-bottom {
+    display: flex;
+    justify-content: center;
+}
+.navbar-bottom {
+    display: block;
+    height: 50px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.ok{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 10px 0px 10px;
+}
+.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    text-align: center;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+
+.warning-add-containeir {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px; /* 自定义高度 */
+    border: 2px dashed #d9d9d9;
+    border-radius: 10px;
+    background-color: rgba(240, 240, 245, 0.3); /* 淡化背景色 */
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.icon-add {
+    font-size: 50px;
+    font-weight: bold;
+    color: rgba(153, 153, 153, 0.7); /* 虚化文字 */
+    margin-right: 10px;
+}
+
+.please-add-img {
+    font-size: 20px;
+    color: rgba(153, 153, 153, 0.7); /* 虚化文字 */
 }

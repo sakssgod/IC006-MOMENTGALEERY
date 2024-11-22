@@ -10,67 +10,108 @@
 </head>
 <body>
 
-<div class="upload-container" onclick="document.getElementById('fileExplorer').style.display='flex'">
-    <div class="upload-icon">+</div>
-    <div class="upload-text">拖放或点击打开图片</div>
-    <div class="upload-button-group">
-        <button class="upload-button" onclick="event.stopPropagation(); document.getElementById('fileExplorer').style.display='flex'">打开图片</button>
-        <button class="dropdown-arrow" onclick="toggleDropdown(event)">
-            <i class="iconfont icon-arrow-down toggle"></i>
-        </button>
 
-        <div class="dropdown-menu" id="dropdownMenu">
-            <div class="dropdown-item" onclick="importFromComputer()">From PC</div>
-            <div class="dropdown-item" onclick="importFromMobile()">From Mobile</div>
-            <div class="dropdown-item" onclick="importFromCloud()">From Instagram</div>
-            <div class="dropdown-item" onclick="importFromDropbox()">From Facebook</div>
+    <div class="upload-container" onclick="document.getElementById('fileExplorer').style.display='flex'">
+        <div class="upload-icon">+</div>
+        <div class="upload-text">拖放或点击打开图片</div>
+        <div class="upload-button-group">
+            <button class="upload-button" onclick="event.stopPropagation(); document.getElementById('fileExplorer').style.display='flex'">打开图片</button>
+            <button class="dropdown-arrow" onclick="toggleDropdown(event)">
+                <i class="iconfont icon-arrow-down toggle"></i>
+            </button>
+    
+            <div class="dropdown-menu" id="dropdownMenu">
+                <div class="dropdown-item" onclick="importFromComputer()">From PC</div>
+                <div class="dropdown-item" onclick="importFromMobile()">From Mobile</div>
+                <div class="dropdown-item" onclick="importFromCloud()">From Instagram</div>
+                <div class="dropdown-item" onclick="importFromDropbox()">From Facebook</div>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="file-explorer" id="fileExplorer">
-    <!-- Top Navigation Bar -->
-    <div class="top-bar">
-        <button class="nav-button">Back</button>
-        <button class="nav-button">Forward</button>
-        <button class="nav-button">Refresh</button>
-        <button class="close-button" onclick="document.getElementById('fileExplorer').style.display='none'">X</button>
-    </div>
-
-    <div class="file-display">
-        <!-- Home Column -->
-        <div class="home-column">
-            <div class="home-item">Home</div>
-            <div class="home-item">Desktop</div>
-            <div class="home-item">Documents</div>
-            <div class="home-item">Downloads</div>
-            <div class="home-item">Music</div>
-            <div class="home-item">Pictures</div>
-            <div class="home-item">Videos</div>
+    
+    <div class="file-explorer" id="fileExplorer">
+        <!-- Top Navigation Bar -->
+        <div class="top-bar">
+            <button class="nav-button">Back</button>
+            <button class="nav-button">Forward</button>
+            <button class="nav-button">Refresh</button>
+            <button class="close-button" onclick="document.getElementById('fileExplorer').style.display='none'">X</button>
         </div>
-
-        <!-- File List -->
-        <div class="outer-file">
-            <div class="file-list">
-                <div class="file-list2">
-                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Desktop</div>
-                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Documents</div>
-                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Downloads</div>
-                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Music</div>
-                    <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Pictures</div>
-                    <div class="file-item"><img src="file-icon.png" alt="File"><br>.bashrc</div>
-                    <div class="file-item"><img src="file-icon.png" alt="File"><br>.profile</div>
-                    <div class="file-item"><img src="file-icon.png" alt="File"><br>example.txt</div>
+    
+        <div class="file-display">
+            <!-- Home Column -->
+            <div class="home-column">
+                <div class="home-item">Home</div>
+                <div class="home-item">Desktop</div>
+                <div class="home-item">Documents</div>
+                <div class="home-item">Downloads</div>
+                <div class="home-item">Music</div>
+                <div class="home-item">Pictures</div>
+                <div class="home-item">Videos</div>
+            </div>
+    
+            <!-- File List -->
+            <div class="outer-file">
+                <div class="file-list">
+                    <div class="file-list2">
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Desktop</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Documents</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Downloads</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Music</div>
+                        <div class="file-item"><img src="folder-icon.png" alt="Folder"><br>Pictures</div>
+                        <div class="file-item"><img src="file-icon.png" alt="File"><br>.bashrc</div>
+                        <div class="file-item"><img src="file-icon.png" alt="File"><br>.profile</div>
+                        <div class="file-item"><img src="file-icon.png" alt="File"><br>example.txt</div>
+                    </div>
+                </div>
+    
+                <div class="bottom-open-cancele">
+                    <button class="bottom-button">open</button>
+                    <button class="bottom-button">cancele</button>
                 </div>
             </div>
-
-            <div class="bottom-open-cancele">
-                <button class="bottom-button">open</button>
-                <button class="bottom-button">cancele</button>
-            </div>
         </div>
     </div>
-</div>
+    
+    <div class="navbar">
+        <!-- 上部部分：图片和打开图片的图标 -->
+        <div class="outer-shell">
+            <div class="navbar-top">
+                <div class="warning-add-containeir" id="warningAddContainer">
+                    <span class="icon-add">+</span>
+                    <span class="please-add-img">Add Image</span>
+                </div>
+                <div class="thumbnail-container hidden">
+                    <img src="../Images/dragao.png" alt="图片缩略图" class="thumbnail">
+                    <img src="../Images/dragao.png" alt="图片缩略图" class="thumbnail">
+                    <img src="../Images/dragao.png" alt="图片缩略图" class="thumbnail">
+                </div>
+                <button class="open-button" onclick="openIframe('EscolherCritWindow.html')">Definir Criterios</button>
+            </div>
+        </div>
+        
+        
+        <!-- 底部部分：进度条和删除按钮 -->
+         <div class="outer-shell-bottom">
+            <div class="navbar-bottom">
+                <progress class="progress-bar" value="0" max="50"></progress>
+                <div class="ok">
+                    <span>0/50</span>
+                    <button class="delete-button">Delete</button>
+                </div>
+    
+            </div>
+         </div>
+    </div>
+
+    <div id="iframeContainer" style="display: none; position: fixed; top: 10%; left: 10%; width: 80%; height: 80%; border: 1px solid #ddd; border-radius: 10px; background-color: white; z-index: 1000;">
+        <iframe id="criteriosIframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+        <button onclick="closeIframe()" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">
+            X
+        </button>
+    </div>
+    
+
 
 
 <script src="../scripts/ImportarPhotos.js"></script> <!-- 引入外部 JavaScript 文件 -->
