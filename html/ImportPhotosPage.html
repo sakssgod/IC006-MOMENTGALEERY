@@ -12,11 +12,11 @@
 <body>
 
 
-    <div class="upload-container" onclick="document.getElementById('fileExplorer').style.display='flex'">
+    <div class="upload-container" onclick="openFileExplorer()">
         <div class="upload-icon">+</div>
         <div class="upload-text">Update Your Image</div>
         <div class="upload-button-group">
-            <button class="upload-button" onclick="event.stopPropagation(); document.getElementById('fileExplorer').style.display='flex'">Upadate</button>
+            <button class="upload-button" onclick="event.stopPropagation(); openFileExplorer()">Update</button>
             <button class="dropdown-arrow" onclick="toggleDropdown(event)">
                 <i class="iconfont icon-arrow-down toggle"></i>
             </button>
@@ -34,18 +34,21 @@
                 <div class="dropdown-item" onclick="importFromFacebook()">
                     <i class="iconfont icon-facebook1"></i> From Facebook
                 </div>
-                
             </div>
         </div>
     </div>
     
+
+    <div id="overlay" class="overlay" onclick="closeFileExplorer()"></div>
+
     <div class="file-explorer" id="fileExplorer">
         <!-- Top Navigation Bar -->
         <div class="top-bar">
             <button class="nav-button">Back</button>
             <button class="nav-button">Forward</button>
             <button class="nav-button">Refresh</button>
-            <button class="close-button" onclick="document.getElementById('fileExplorer').style.display='none'">X</button>
+            <button class="close-button" onclick="closeFileExplorer()">X</button>
+
         </div>
     
         <div class="file-display">
@@ -76,8 +79,8 @@
                 </div>
     
                 <div class="bottom-open-cancele">
-                    <button class="bottom-button">open</button>
-                    <button class="bottom-button">cancele</button>
+                    <button class="bottom-button" onclick="closeFileExplorer()">Open</button>
+                    <button class="bottom-button" onclick="closeFileExplorer()">Cancele</button>
                 </div>
             </div>
         </div>
@@ -96,7 +99,7 @@
                     <img src="../Images/dragao.png" alt="图片缩略图" class="thumbnail">
                     <img src="../Images/dragao.png" alt="图片缩略图" class="thumbnail">
                 </div>
-                <button class="open-button" onclick="openIframe('EscolherCritWindow.html')"><i class=" iconfont icon-shaixuan1 "></i>Definir Criterios</button>
+                <button class="open-button" onclick="openIframe('EscolherCritWindow.html')"><i class=" iconfont  "></i>Definir Criterios</button>
             </div>
         </div>
         
@@ -123,13 +126,7 @@
         
     </div>
 
-    <div id="iframeContainer" style="display: none; position: fixed; top: 10%; left: 10%; width: 80%; height: 80%; border: 1px solid #ddd; border-radius: 10px; background-color: white; z-index: 1000;">
-        <iframe id="criteriosIframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
-        <button onclick="closeIframe()" style="position: absolute; top: 10px; right: 10px; background: red; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">
-            X
-        </button>
-    </div>
-    
+
 
 
 
