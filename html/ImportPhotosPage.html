@@ -6,6 +6,7 @@
     <title>图片上传示例</title>
     <link rel="stylesheet" href="../style/ImportPhotosPage.css"> <!-- 引入外部 CSS 文件 -->
     <link rel="stylesheet" href="../IconFiles/jiantou/iconfont.css">
+    <link rel="stylesheet" href="../IconFiles/idw/font_4742343_jpqqywp4zb/iconfont.css">
     
 </head>
 <body>
@@ -13,18 +14,27 @@
 
     <div class="upload-container" onclick="document.getElementById('fileExplorer').style.display='flex'">
         <div class="upload-icon">+</div>
-        <div class="upload-text">拖放或点击打开图片</div>
+        <div class="upload-text">Update Your Image</div>
         <div class="upload-button-group">
-            <button class="upload-button" onclick="event.stopPropagation(); document.getElementById('fileExplorer').style.display='flex'">打开图片</button>
+            <button class="upload-button" onclick="event.stopPropagation(); document.getElementById('fileExplorer').style.display='flex'">Upadate</button>
             <button class="dropdown-arrow" onclick="toggleDropdown(event)">
                 <i class="iconfont icon-arrow-down toggle"></i>
             </button>
     
             <div class="dropdown-menu" id="dropdownMenu">
-                <div class="dropdown-item" onclick="importFromComputer()">From PC</div>
-                <div class="dropdown-item" onclick="importFromMobile()">From Mobile</div>
-                <div class="dropdown-item" onclick="importFromCloud()">From Instagram</div>
-                <div class="dropdown-item" onclick="importFromDropbox()">From Facebook</div>
+                <div class="dropdown-item" onclick="importFromComputer()">
+                    <i class="iconfont icon-pc"></i> From PC
+                </div>
+                <div class="dropdown-item" onclick="importFromCloud()">
+                    <i class="iconfont icon-cloud-upload"></i> From Cloud
+                </div>
+                <div class="dropdown-item" onclick="importFromDropbox()">
+                    <i class="iconfont icon-instagram"></i> From Instagram
+                </div>
+                <div class="dropdown-item" onclick="importFromFacebook()">
+                    <i class="iconfont icon-facebook1"></i> From Facebook
+                </div>
+                
             </div>
         </div>
     </div>
@@ -86,22 +96,31 @@
                     <img src="../Images/dragao.png" alt="图片缩略图" class="thumbnail">
                     <img src="../Images/dragao.png" alt="图片缩略图" class="thumbnail">
                 </div>
-                <button class="open-button" onclick="openIframe('EscolherCritWindow.html')">Definir Criterios</button>
+                <button class="open-button" onclick="openIframe('EscolherCritWindow.html')"><i class=" iconfont icon-shaixuan1 "></i>Definir Criterios</button>
             </div>
         </div>
         
         
         <!-- 底部部分：进度条和删除按钮 -->
-         <div class="outer-shell-bottom">
+        <div class="outer-shell-bottom">
             <div class="navbar-bottom">
                 <progress class="progress-bar" value="0" max="50"></progress>
                 <div class="ok">
                     <span>0/50</span>
-                    <button class="delete-button">Delete</button>
+                    <button class="delete-button">
+                        <i class="iconfont icon-lajixiang"></i>Delete
+                    </button>
                 </div>
-    
             </div>
-         </div>
+        </div>
+         
+         
+         <div class="bottom-line">
+            <button class="ajuda">
+                <i class=" iconfont icon-pc"></i> Ajuda
+            </button>
+        </div>
+        
     </div>
 
     <div id="iframeContainer" style="display: none; position: fixed; top: 10%; left: 10%; width: 80%; height: 80%; border: 1px solid #ddd; border-radius: 10px; background-color: white; z-index: 1000;">

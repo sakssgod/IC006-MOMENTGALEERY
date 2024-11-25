@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Combined Home and Import Photos</title>
     <link rel="stylesheet" href="../style/mix.css"> <!-- 引入外部 CSS 文件 -->
+    
+    
 </head>
 <body>
     <div class="container">
@@ -15,5 +17,23 @@
             <iframe name="f2" src="../html/ImportPhotosPage.html"></iframe>
         </div>
     </div>
+    <script>
+        window.addEventListener("message", (event) => {
+            // 检查消息来源
+            if (event.data && event.data.shellClosed !== undefined) {
+                const sidebar = document.querySelector('.sidebar');
+    
+                // 根据 shell 的状态调整 sidebar 的宽度
+                if (event.data.shellClosed) {
+                    sidebar.style.flex = "0 0 100px"; // shell 关闭时
+                } else {
+                    sidebar.style.flex = "0 0 263px"; // shell 打开时
+                }
+            }
+        });
+        
+    </script>
+    
+    
 </body>
 </html>

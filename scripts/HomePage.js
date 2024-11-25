@@ -8,11 +8,16 @@ const body = document.querySelector('body'),
 // 切换侧边栏宽度
 toggle.addEventListener("click", () => {
     shell.classList.toggle("close");
+
+    const isClosed = shell.classList.contains("close");
+    window.parent.postMessage({ shellClosed: isClosed }, "*");
 });
 
 // 点击搜索框时打开侧边栏
 searchBtn.addEventListener("click", () => {
     shell.classList.remove("close");
+
+    window.parent.postMessage({ shellClosed: false }, "*");
 });
 
 // 切换主题模式

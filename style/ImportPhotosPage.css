@@ -6,11 +6,25 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f5;
+    background-color:var(--body-color);
 }
 
-.big-outer-shell {
+:root {
+    --body-color: #E4E9F7;
+    --shell-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+}
 
+.dark {
+    --body-color: #202224;
+    --shell-color: #171717;
+    --primary-color: #3a3b3c;
+    --primary-color-light: #3a3b3c;
+    --toggle-color: #FFF;
+    --text-color: #ccc;
 }
 
 .upload-container {
@@ -19,7 +33,7 @@ body {
     border: 2px dashed #d9d9d9;
     border-radius: 10px;
     width: 350px;
-    background-color: #E4E9F7;
+    background-color: var(--shell-color);
     position: relative;
     cursor: pointer;
 }
@@ -58,6 +72,11 @@ body {
     width: 75%;
 }
 
+.upload-button:hover {
+    background-color: #287bc4; /* 鼠标悬停时的颜色 */
+    color: #ffffff; /* 保持文字为白色 */
+}
+
 .dropdown-arrow {
     background-color: #3399ff;
     color: white;
@@ -73,6 +92,11 @@ body {
     width: 25%;
 }
 
+.dropdown-arrow:hover {
+    background-color: #287bc4; /* 鼠标悬停时的颜色 */
+    color: #ffffff; /* 保持文字/图标为白色 */
+}
+
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -82,7 +106,7 @@ body {
     border-radius: 8px;
     z-index: 1000;
     padding: 5px 0;
-    margin-top: 40%;
+    margin-top: 45%;
 }
 
 .dropdown-item {
@@ -301,9 +325,15 @@ body {
     background-color: #0056b3;
 }
 
+.open-button i {
+    font-size: 23px; /* 图标大小 */
+    margin-right: 5px; /* 图标与文字间距 */
+}
+
 .outer-shell-bottom {
     display: flex;
     justify-content: center;
+
 }
 .navbar-bottom {
     display: block;
@@ -368,3 +398,84 @@ body {
     font-size: 20px;
     color: rgba(153, 153, 153, 0.7); /* 虚化文字 */
 }
+
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-item i {
+    font-size: 25px; /* 图标大小 */
+    margin-right: 15px; /* 图标与文字的间距 */
+    color: #3399ff; /* 图标颜色，可根据需求修改 */
+}
+
+
+.dropdown-item i.icon-instagram {
+    color: #E4405F; /* Instagram 颜色 */
+}
+
+.dropdown-item i.icon-facebook1 {
+    color: #1877F2; /* Facebook 颜色 */
+}
+
+
+.delete-button {
+    background-color: #dc3545; /* 红色背景 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.delete-button i {
+    font-size: 16px; /* 图标大小 */
+    margin-right: 5px; /* 图标与文字间距 */
+}
+
+.delete-button:hover {
+    background-color: #c82333; /* 鼠标悬停效果 */
+}
+
+
+.ajuda {
+    background-color: #e7f3ff; /* 浅蓝背景 */
+    color: #3399ff; /* 蓝色文字 */
+    border: none;
+    border-radius: 20px; /* 圆角边框 */
+    padding: 10px 20px; /* 按钮内边距 */
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+}
+
+.ajuda i {
+    font-size: 20px; /* 图标大小 */
+    margin-right: 5px; /* 图标与文字间距 */
+}
+
+.ajuda:hover {
+    background-color: #d8e9ff; /* 鼠标悬停背景色 */
+}
+
+.bottom-line {
+    text-align: center; /* 水平居中 */
+    margin-top: 10px;
+    padding: 10px;
+    background-color: white; /* 背景色 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #ccc;
+}
+
+

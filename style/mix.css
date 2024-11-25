@@ -13,9 +13,9 @@ body {
 
 /* 左侧栏样式 */
 .sidebar {
-    flex: 0 0 25%; /* 固定宽度占 25% */
+    flex: 0 0 100px; /* 默认宽度 */
     height: 100%;
-    border: 1px solid black;
+    transition: flex 0.3s ease; /* 平滑过渡效果 */
 }
 
 /* 右侧内容区样式 */
