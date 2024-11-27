@@ -57,3 +57,22 @@ fileExplorer.addEventListener('click', (event) => {
 
 // 绑定遮罩点击事件
 overlay.addEventListener('click', closeFileExplorer);
+
+
+function openIframe(url) {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const criteriosIframe = document.getElementById('criteriosIframe');
+    if (iframeContainer && criteriosIframe) {
+        criteriosIframe.src = url; // 设置 iframe 的链接
+        iframeContainer.style.display = 'block'; // 显示 iframe 容器
+    }
+}
+
+function closeIframe() {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const criteriosIframe = document.getElementById('criteriosIframe');
+    if (iframeContainer && criteriosIframe) {
+        criteriosIframe.src = ''; // 清空 iframe 的链接
+        iframeContainer.style.display = 'none'; // 隐藏 iframe 容器
+    }
+}
