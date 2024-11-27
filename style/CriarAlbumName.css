@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .modal-body {
+    margin: 20px 0;
+  }
+  
+  .modal-body label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    color: black;
+  }
+  
+  .modal-body input {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    background-color: #1e1e1e;
+    color: black;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .modal-footer button{
+    width: 30%;
+
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  
+  .btn.cancel {
+    background-color: #333333;
+    color: black;
+  }
+  
+  .btn.cancel:hover {
+    background-color: #444444;
+  }
+  
+  .btn.create {
+    background-color: #1f9d55;
+    color: black;
+  }
+  
+  .btn.create:hover {
+    background-color: #16a34a;
+  }
+  
