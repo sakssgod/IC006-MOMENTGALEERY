@@ -33,20 +33,23 @@ body, html {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 10px;
+    top: 190px;
     right: 10px;
-    color: #fff;
+    z-index: 100;
+    
+
 }
 
 .user span {
     font-size: 20px;
     font-weight: bold;
     margin-right: 10px;
+    color: aliceblue;
 }
 
 .user img {
     border: 2px solid #fff;
-    border-radius: 50%;
+    border-radius: 20%;
 }
 
 .content-wrapper {
@@ -85,7 +88,7 @@ body, html {
 }
 
 .post-images img {
-    max-width: 100%;
+    max-width: 25%;
     margin: 5px 0;
     border-radius: 5px;
 }
