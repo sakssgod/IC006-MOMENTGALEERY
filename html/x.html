@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Radio Buttons</title>
+</head>
+<body>
+    <form id="cityForm">
+        <h3>Choose a City:</h3>
+    </form>
+
+    <script>
+        const cityList = [
+            "Albufeira", "Almada", "Amadora", "Amarante", "Angra do Heroísmo", 
+            "Aveiro", "Barcelos", "Beja", "Braga", "Bragança", "Caldas da Rainha", 
+            "Caminha", "Cantanhede", "Cascais", "Chaves", "Coimbra", 
+            "Celorico de Basto", "Faro", "Figueira da Foz", "Funchal", "Guimarães", 
+            "Lamego", "Leiria", "Lisboa", "Loulé", "Mafra", "Maia", "Matosinhos", 
+            "Montalegre", "Montijo", "Odivelas", "Olhão", "Póvoa de Varzim", 
+            "Porto", "Ponta Delgada", "Penafiel", "Paredes", "Porto", "Santarém", 
+            "Setúbal", "Sintra", "Sines", "Tomar", "Tavira", "Torres Vedras", "Viana do Castelo", 
+            "Vila do Conde", "Vila Nova de Gaia", "Vila Real", "Viseu"
+        ];
+
+        const form = document.getElementById('cityForm');
+
+        cityList.forEach(city => {
+            // 创建一个标签
+            const label = document.createElement('label');
+            label.style.display = 'block'; // 让每个标签独占一行
+
+            // 创建一个单选按钮
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'city'; // 单选按钮组的名字
+            radio.value = city;
+
+            // 将单选按钮和城市名添加到标签中
+            label.appendChild(radio);
+            label.appendChild(document.createTextNode(city));
+
+            // 将标签添加到表单中
+            form.appendChild(label);
+        });
+    </script>
+</body>
+</html>
