@@ -529,6 +529,14 @@
             iframeContainer.style.display = 'none';
         }
     }
+
+    document.querySelector('.bottom-button.criar').addEventListener('click', () => {
+    // 通知父页面关闭iframe并显示modal-pack
+    window.parent.postMessage({ action: 'openModalPack' }, '*');
+    });
+
+
+
 </script>
 
 </body>

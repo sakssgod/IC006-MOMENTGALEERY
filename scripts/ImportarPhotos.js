@@ -85,7 +85,7 @@ function resizeIframe() {
         
         // 获取内部内容的高度和宽度
         const iframeHeight = iframeContent.scrollHeight - 5;
-        const iframeWidth = iframeContent.scrollWidth + 25;
+        const iframeWidth = iframeContent.scrollWidth + 24;
 
         // 调整 iframe 的高度和宽度
         iframe.style.height = iframeHeight + 'px';
@@ -95,4 +95,24 @@ function resizeIframe() {
 
 // 调用函数
 resizeIframe();
+
+
+// 获取相关元素
+const iframeContainer = document.getElementById('iframeContainer');
+const modalPack = document.querySelector('.modal-pack');
+const initialModal = document.getElementById('initial-modal');
+const loadingModal = document.getElementById('loading-modal');
+const successModal = document.getElementById('success-modal');
+
+// 监听来自子页面的消息
+window.addEventListener('message', (event) => {
+    if (event.data.action === 'openModalPack') {
+        // 隐藏 iframe 容器
+        iframeContainer.style.display = 'none';
+        
+        // 显示 modal-pack
+        modalPack.style.display = 'block';
+        initialModal.style.display = 'block';
+    }
+});
 

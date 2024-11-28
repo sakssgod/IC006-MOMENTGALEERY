@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../style/ImportPhotosPage.css"> <!-- 引入外部 CSS 文件 -->
     <link rel="stylesheet" href="../IconFiles/jiantou/iconfont.css">
     <link rel="stylesheet" href="../IconFiles/idw/font_4742343_jpqqywp4zb/iconfont.css">
+    <link rel="stylesheet" href="../style/CriarAlbumName.css">
     
 </head>
 <body>
@@ -130,10 +131,43 @@
         <iframe id="criteriosIframe" src="" style="width: auto; height: auto; border: none;" scrolling="no"></iframe>
     </div>
     
-
+    <div  class="modal-pack" id="modalPack">
+        <div class="modal" id="initial-modal" style="display: block;">
+          <div class="modal-header">
+            <h2>Nova Álbum</h2>
+          </div>
+          <div class="modal-body">
+            <label for="album-name">Nome do Álbum:</label>
+            <input type="text" id="album-name" placeholder="Digite o nome do álbum">
+          </div>
+          <div class="modal-footer">
+            <button id="cancel-button" class="btn cancel">Cancelar</button>
+            <button id="create-button" class="btn create">Criar</button>
+          </div>
+        </div>
+        
+        <!-- Loading Modal -->
+        <div class="modal" id="loading-modal" style=" display: none;  justify-content: center;
+          align-items: center;">
+          <div class="modal-content">
+            <p>Criando álbum...</p>
+            <div class="spinner"></div>
+          </div>
+        </div>
+        
+        <!-- Success Modal -->
+        <div class="modal" id="success-modal" style=" justify-content: center; display: none;
+          align-items: center;">
+          <div class="modal-content">
+            <p>Álbum criado com sucesso!</p>
+            <button id="success-ok" class="btn create">OK</button>
+          </div>
+        </div>
+      </div>
 
 
 
 <script src="../scripts/ImportarPhotos.js"></script> <!-- 引入外部 JavaScript 文件 -->
+<script src="../scripts/CriarAlbumName.js"></script>
 </body>
 </html>
