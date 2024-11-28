@@ -76,3 +76,23 @@ function closeIframe() {
         iframeContainer.style.display = 'none'; // 隐藏 iframe 容器
     }
 }
+
+
+function resizeIframe() {
+    const iframe = document.getElementById('criteriosIframe');
+    iframe.onload = () => {
+        const iframeContent = iframe.contentWindow.document.body;
+        
+        // 获取内部内容的高度和宽度
+        const iframeHeight = iframeContent.scrollHeight - 5;
+        const iframeWidth = iframeContent.scrollWidth + 25;
+
+        // 调整 iframe 的高度和宽度
+        iframe.style.height = iframeHeight + 'px';
+        iframe.style.width = iframeWidth + 'px';
+    };
+}
+
+// 调用函数
+resizeIframe();
+

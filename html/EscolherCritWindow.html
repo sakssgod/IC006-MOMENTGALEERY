@@ -9,7 +9,7 @@
         /* 整体布局 */
         .container {
             display: flex;
-            padding: 20px;
+            padding: 10px;
         }
 
         .outer-shell {
@@ -178,17 +178,31 @@
     }
 
     .bottom-open-cancele .bottom-button {
-        background-color: #444;
+
         color: #f5f5f5;
-        height: 20px;
+        height: 30px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
 
-    .bottom-open-cancele .bottom-button:hover {
-        background-color: #555;
+    .bottom-open-cancele .bottom-button.criar:hover {
+        background-color: rgb(147, 212, 147);
     }
+
+    .bottom-button.criar{
+        background-color: green;
+
+    }
+    .bottom-button.cancelar{
+
+        background-color: #444;
+    }
+
+    .bottom-open-cancele .bottom-button.cancelar:hover {
+        background-color: #888686;
+    }
+
     </style>
 </head>
 <body>
@@ -466,8 +480,8 @@
         </div>
 
         <div class="bottom-open-cancele">
-            <button class="bottom-button">Criar Album</button>
-            <button class="bottom-button">Cancelar</button>
+            <button class="bottom-button criar">Criar Album</button>
+            <button class="bottom-button cancelar" onclick="closeIframe()">Cancelar</button>
             
         </div>
     </div>
@@ -496,6 +510,14 @@
             option.style.display = 'none';
         });
     });
+
+    function closeIframe() {
+        // 关闭 iframeContainer
+        const iframeContainer = window.parent.document.getElementById('iframeContainer');
+        if (iframeContainer) {
+            iframeContainer.style.display = 'none';
+        }
+    }
 </script>
 
 </body>
