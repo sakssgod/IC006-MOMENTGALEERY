@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     const postList = document.getElementById('post-list');
 
@@ -9,10 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 userpic: "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg",
                 content: "今天周四啦",
                 picUrl: ["https://img.zcool.cn/community/017445590a8752a80121455021e118.jpg"],
-                time: "1小时前",
-                likes: ["摆渡人"],
+                time: "1 hour ago",
+                likes: ["2号选手", "蛋糕形的微波炉"],
                 comments: [
-                    { pname: "1号选手", comment: "又是一个周四！" }
+                    { pname: "1号选手", comment: "又是一个周四！" },
+                    { pname: "我是你爹", comment: "这是哪里呀 老铁" }
                 ]
             },
             {
@@ -20,21 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 userpic: "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg",
                 content: "每天早上一杯怀姜杏仁臻白饮...",
                 picUrl: ["https://img.zcool.cn/community/0195cf55792ace00000059ff8e3f7b.jpg"],
-                time: "13分钟前",
+                time: "13 mim ago",
                 likes: [],
                 comments: [
-                    { pname: "2号选手", comment: "天空真好看" }
-                ]
-            },
-            {
-                name: "1号选手",
-                userpic: "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg",
-                content: "今天周四啦",
-                picUrl: ["https://img.zcool.cn/community/017445590a8752a80121455021e118.jpg"],
-                time: "1小时前",
-                likes: ["摆渡人"],
-                comments: [
-                    { pname: "1号选手", comment: "又是一个周四！" }
+                    { pname: "2号选手", comment: "天空真好看" },
+                    { pname: "1号选手", comment: "你模仿我！" },
+                    { pname: "我是你爹", comment: "woca www" }
+                
                 ]
             }
         ]
@@ -75,24 +69,46 @@ document.addEventListener("DOMContentLoaded", () => {
             const footerDiv = document.createElement('div');
             footerDiv.className = 'post-footer';
             footerDiv.innerHTML = `
-                <span>${post.time}</span>
-                <button class="like-button" data-index="${index}">
-                    ${post.likes.includes(data.username) ? "取消点赞" : "点赞"}
-                </button>
-                <button class="comment-button" data-index="${index}">评论</button>
+                <span class="post-time">${post.time}</span>
+                <button class="toggle-menu" data-index="${index}">...</button>
+                <div class="footer-buttons hidden">
+                    <button class="like-button" data-index="${index}">
+                        ${post.likes.includes(data.username) ? "Dislike" : "Like"}
+                    </button>
+                    <button class="comment-button" data-index="${index}">Comment</button>
+                </div>
             `;
             postDiv.appendChild(footerDiv);
 
-            // 评论
+            // 点赞用户和评论区域
+            const interactionDiv = document.createElement('div');
+            interactionDiv.className = 'interaction-area';
+
+            // 点赞用户区域
+            const likesDiv = document.createElement('div');
+            likesDiv.className = 'likes';
+            if (post.likes && post.likes.length > 0) {
+                likesDiv.innerHTML = `<span>❤️ ${post.likes
+                    .map(user => `<span class="comment-user">${user}</span>`)
+                    .join(", ")}</span>`;
+            } else {
+                likesDiv.innerHTML = `<span>Nobody liked yet</span>`;
+            }
+            
+            interactionDiv.appendChild(likesDiv);
+
+            // 评论区域
             const commentsDiv = document.createElement('div');
             commentsDiv.className = 'comments';
             post.comments.forEach(comment => {
                 const commentDiv = document.createElement('div');
-                commentDiv.innerHTML = `<strong>${comment.pname}:</strong> ${comment.comment}`;
+                commentDiv.innerHTML = `<strong><span class="comment-user">${comment.pname}</span>:</strong> ${comment.comment}`;
                 commentsDiv.appendChild(commentDiv);
             });
-            postDiv.appendChild(commentsDiv);
+            
+            interactionDiv.appendChild(commentsDiv);
 
+            postDiv.appendChild(interactionDiv);
             postList.appendChild(postDiv);
         });
     }
@@ -101,8 +117,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     postList.addEventListener('click', (e) => {
         const target = e.target;
-        const index = target.dataset.index;
-        if (target.classList.contains('like-button')) {
+
+        // 切换按钮显示/隐藏
+        if (target.classList.contains("toggle-menu")) {
+            const footerButtons = target.nextElementSibling;
+            if (footerButtons.classList.contains("hidden")) {
+                footerButtons.classList.remove("hidden");
+            } else {
+                footerButtons.classList.add("hidden");
+            }
+        }
+
+        // 点赞功能
+        if (target.classList.contains("like-button")) {
+            const index = target.dataset.index;
             const post = data.posts[index];
             if (post.likes.includes(data.username)) {
                 post.likes = post.likes.filter(user => user !== data.username);
@@ -112,7 +140,9 @@ document.addEventListener("DOMContentLoaded", () => {
             renderPosts(data.posts);
         }
 
-        if (target.classList.contains('comment-button')) {
+        // 评论功能
+        if (target.classList.contains("comment-button")) {
+            const index = target.dataset.index;
             const comment = prompt("请输入评论：");
             if (comment) {
                 data.posts[index].comments.push({ pname: data.username, comment });
