@@ -3,23 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nova Pasta</title>
+  <title>Criar Álbum</title>
   <link rel="stylesheet" href="../style/CriarAlbumName.css">
 </head>
 <body>
-  <div class="modal">
-    <div class="modal-header">
-      <h2>Nova Album</h2>
-    </div>
-    <div class="modal-body">
-      <label for="folder-name">Nome da Album</label>
-      <input type="text" id="folder-name" placeholder="Digite o nome da pasta">
-    </div>
-    <div class="modal-footer">
-      <button id="cancel-button" class="btn cancel">Cancelar</button>
-      <button id="create-button" class="btn create">Criar</button>
-    </div>
+
+  <!-- 初始模态框 -->
+<div class="modal" id="initial-modal" style="display: block;">
+  <div class="modal-header">
+    <h2>Nova Álbum</h2>
   </div>
+  <div class="modal-body">
+    <label for="album-name">Nome do Álbum:</label>
+    <input type="text" id="album-name" placeholder="Digite o nome do álbum">
+  </div>
+  <div class="modal-footer">
+    <button id="cancel-button" class="btn cancel">Cancelar</button>
+    <button id="create-button" class="btn create">Criar</button>
+  </div>
+</div>
+
+<!-- Loading Modal -->
+<div class="modal" id="loading-modal" style=" display: none;  justify-content: center;
+  align-items: center;">
+  <div class="modal-content">
+    <p>Criando álbum...</p>
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="success-modal" style=" justify-content: center; display: none;
+  align-items: center;">
+  <div class="modal-content">
+    <p>Álbum criado com sucesso!</p>
+    <button id="success-ok" class="btn create">OK</button>
+  </div>
+</div>
+
+
   <script src="../scripts/CriarAlbumName.js"></script>
 </body>
 </html>
