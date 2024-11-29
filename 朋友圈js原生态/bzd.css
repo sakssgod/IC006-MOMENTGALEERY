@@ -129,6 +129,10 @@ body, html {
     cursor: pointer;
     position: absolute;
     right: 10px;
+    background-color: rgb(207, 204, 204);
+    color: rgb(38, 156, 224);
+    padding: 2px;
+    
 }
 
 .interaction-area {
