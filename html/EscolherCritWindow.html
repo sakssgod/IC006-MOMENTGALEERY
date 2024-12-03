@@ -10,6 +10,8 @@
         .container {
             display: flex;
             padding: 10px;
+            margin: 150px auto;
+            width: 900px;
         }
 
         .outer-shell {
@@ -307,10 +309,19 @@
             <div class="filter-section">
                 <div class="filter-header">Person</div>
                 <ul class="filter-options">
-                    <li><input type="checkbox"> Child (0-12 years)</li>
-                    <li><input type="checkbox"> Teenager (13-19 years)</li>
-                    <li><input type="checkbox"> Adult (20-64 years)</li>
-                    <li><input type="checkbox"> Senior (65+ years)</li>
+                    <li><input type="checkbox"> Friend</li>
+                    <li><input type="checkbox"> Family</li>
+                    <li><input type="checkbox"> Colleague</li>
+                    <li><input type="checkbox"> Neighbor</li>
+                    <li class="hidden-option"><input type="checkbox"> Classmate</li>
+                    <li class="hidden-option"><input type="checkbox"> Stranger</li>
+                    <li class="hidden-option"><input type="checkbox"> Client</li>
+                    <li class="hidden-option"><input type="checkbox"> Mentor</li>
+                    <li class="hidden-option"><input type="checkbox"> Student</li>
+                    <li class="hidden-option"><input type="checkbox"> Partner/Collaborator</li>
+                    <li class="hidden-option"><input type="checkbox"> Boss/Supervisor</li>
+                    <li class="hidden-option"><input type="checkbox"> Subordinate</li>
+                    <li class="hidden-option"><input type="checkbox"> Patient</li>
                 </ul>
                 <div class="show-toggle" onclick="toggleOptions()">Show more</div>
                 <hr>
