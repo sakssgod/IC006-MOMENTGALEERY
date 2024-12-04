@@ -62,6 +62,11 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.album-item a{
+    color: black;
+    text-decoration: none;
+}
+
 .album-item:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
