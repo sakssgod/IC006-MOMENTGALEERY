@@ -9,42 +9,116 @@
 </head>
 <body>
     
-    <div>
-        我的相册
+    <div class="topnav">
+        <a class="BackBtn">Back</a>
+        <span class="title">My Photo Album</span>
+        <a class="deleteBtn">Delete</a>
     </div>
-
+    
     <div class="album-container">
-        <div class="album-frame">
-            <!-- Album icon with name -->
-            <div class="album-item">
-                <a href="InsideAlbum.html">
-                    <div class="icon album">&#xe600;</div>
-                    <div class="album-name">Album1</div>
-                </a>
-            </div>
-            <div class="album-item">
-                <a href="InsideAlbum.html">
-                    <div class="icon album">&#xe600;</div>
-                    <div class="album-name">Album2</div>
-                </a>
-            </div>
-            <div class="album-item">
-                <a href="InsideAlbum.html">
-                    <div class="icon album">&#xe600;</div>
-                    <div class="album-name">Album3</div>
-                </a>
-            </div>
-            
-            <!-- Plus icon with name -->
-            <div class="album-item">
-                    <div class="icon album">&#xe600;</div>
-                    <div class="album-name">Criar Album</div>
-            </div>
+        <div class="album-item add-album">
+            <div class="icon plus">&#xe605;</div>
+            <div class="album-name">Creat New Album</div>
+        </div>
+        <div class="album-item" data-album-id="1">
+            <input type="checkbox" class="deleteCheckbox">
+            <div class="icon album">&#xe600;</div>
+            <div class="album-name">Album1</div>
+        </div>
+        <div class="album-item" data-album-id="2">
+            <input type="checkbox" class="deleteCheckbox">
+            <div class="icon album">&#xe600;</div>
+            <div class="album-name">Album2</div>
+        </div>
+        <div class="album-item" data-album-id="3">
+            <input type="checkbox" class="deleteCheckbox">
+            <div class="icon album">&#xe600;</div>
+            <div class="album-name">Album3</div>
+        </div>
+        <div class="album-item" data-album-id="4">
+            <input type="checkbox" class="deleteCheckbox">
+            <div class="icon album">&#xe600;</div>
+            <div class="album-name">Album4</div>
+        </div>
+        <div class="album-item" data-album-id="5">
+            <input type="checkbox" class="deleteCheckbox">
+            <div class="icon album">&#xe600;</div>
+            <div class="album-name">Album5</div>
         </div>
     </div>
+    <script>
+        const checkboxes = document.querySelectorAll('.deleteCheckbox');
+        const deleteBtn = document.querySelector('.deleteBtn');
+        const BackBtn = document.querySelector('.BackBtn');
+        
+        deleteBtn.style.visibility = 'hidden'; 
+        deleteBtn.style.pointerEvents = 'none'; 
 
-    <div class="InAlbum-extention">
-    </div>
+        BackBtn.style.visibility = 'hidden'; 
+        BackBtn.style.pointerEvents = 'none'; 
+    
+        const albumContainer = document.querySelector('.album-container');
+        let albumCounter = albumContainer.querySelectorAll('.album-item').length - 1;
 
+        const bindCheckboxEvent = (checkbox) => {
+            checkbox.addEventListener('change', () => {
+                const anyChecked = Array.from(document.querySelectorAll('.deleteCheckbox')).some(cb => cb.checked);
+                deleteBtn.style.visibility = anyChecked ? 'visible' : 'hidden';
+                deleteBtn.style.pointerEvents = anyChecked ? 'auto' : 'none';
+            });
+        };
+
+        const bindAlbumClickEvent = (album) => {
+            album.addEventListener('click', (event) => {
+                if (event.target.classList.contains('deleteCheckbox')) return;
+
+                const albumName = album.querySelector('.album-name').textContent;
+                const albumId = album.getAttribute('data-album-id') || 'new';
+                window.location.href = `InsideAlbum.html?albumId=${albumId}&albumName=${encodeURIComponent(albumName)}`;
+            });
+        };
+
+        document.querySelectorAll('.deleteCheckbox').forEach(bindCheckboxEvent);
+
+        document.querySelectorAll('.album-item:not(.add-album)').forEach(bindAlbumClickEvent);
+
+        deleteBtn.addEventListener('click', () => {
+            const selectedCount = document.querySelectorAll('.deleteCheckbox:checked').length;
+            if (selectedCount === 1) {
+                const albumName = document.querySelector('.deleteCheckbox:checked').closest('.album-item').querySelector('.album-name').textContent;
+                if (confirm(`Are you sure you want to delete the album "${albumName}"?`)) {
+                    document.querySelectorAll('.deleteCheckbox:checked').forEach(cb => cb.closest('.album-item').remove());
+                    deleteBtn.style.visibility = 'hidden';
+                    deleteBtn.style.pointerEvents = 'none';
+                }
+            } else if (selectedCount > 1) {
+                if (confirm(`Are you sure you want to delete ${selectedCount} albums?`)) {
+                    document.querySelectorAll('.deleteCheckbox:checked').forEach(cb => cb.closest('.album-item').remove());
+                    deleteBtn.style.visibility = 'hidden';
+                    deleteBtn.style.pointerEvents = 'none';
+                }
+            }
+        });
+
+        document.querySelector('.album-container').addEventListener('click', (event) => {
+    
+            if (event.target.closest('.album-item.add-album')) {
+                albumCounter++; 
+                const newAlbum = document.createElement('div');
+                newAlbum.classList.add('album-item');
+                newAlbum.setAttribute('data-album-id', albumCounter);
+                newAlbum.innerHTML = `
+                    <input type="checkbox" class="deleteCheckbox">
+                    <div class="icon album">&#xe600;</div>
+                    <div class="album-name">Album${albumCounter}</div>
+                `;
+                albumContainer.appendChild(newAlbum);
+
+                const newCheckbox = newAlbum.querySelector('.deleteCheckbox');
+                bindCheckboxEvent(newCheckbox);
+                bindAlbumClickEvent(newAlbum); 
+            }
+        });
+    </script>
 </body>
 </html>
