@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    font-family: 'Arial';
+}
+
+.slideshow-container {
+    display: flex;
+    height: 100vh; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    transition: width 1s ease, left 1s ease; 
+    z-index: 1;
+    background-color: #2f2f2f;
+    justify-content: center;
+    align-items: center;  
+}
+
+img {
+    height: 60vh;
+    max-width: 100%; 
+    object-fit: contain; 
+    display: block;
+    background-color: transparent;
+}
+
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    z-index: 10;
+}
+
+.next {
+    right: 0; 
+    border-radius: 3px 0 0 3px;
+}
+
+.prev {
+    left: 0; 
+    border-radius: 0 3px 3px 0;
+}
+
+.prev:hover, .next:hover {
+    background-color: white; 
+    color: black;
+}
+
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+.topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    font-family: Arial, sans-serif;
+}
+
+.topnav a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px solid black;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.topnav a:hover {
+    background-color: black; 
+    color: white;
+}
+
+.topnav .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    text-align: center; 
+}
+
+.topnav a.info {
+    float: right;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: width 1s ease;
+    padding-top: 70px;
+    z-index: 4; 
+}
+
+.sidebar a, h2, p{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar p{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+}
+
+#main {
+    transition: left 1s ease, width 1s ease;
+    position: relative;
+    z-index: 1;
+}
