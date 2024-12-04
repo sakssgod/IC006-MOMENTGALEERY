@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 time: "1 hour ago",
                 likes: ["Ayi Li", "Not me"],
                 comments: [
-                    { pname: "1号选手", comment: "Another  thursday!" },
+                    { pname: "OuJie Wu", comment: "Another  thursday!" },
                     { pname: "Not Me", comment: "Where it is maan" }
                 ]
             },
