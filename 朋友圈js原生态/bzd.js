@@ -3,31 +3,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const postList = document.getElementById('post-list');
 
     const data = {
-        username: "摆渡人",
+        username: "Me",
         posts: [
             {
-                name: "1号选手",
+                name: "OuJie Wu",
                 userpic: "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg",
-                content: "今天周四啦",
+                content: "Oh Yeah!!!",
                 picUrl: ["https://img.zcool.cn/community/017445590a8752a80121455021e118.jpg"],
                 time: "1 hour ago",
-                likes: ["2号选手", "蛋糕形的微波炉"],
+                likes: ["Ayi Li", "Not me"],
                 comments: [
-                    { pname: "1号选手", comment: "又是一个周四！" },
-                    { pname: "我是你爹", comment: "这是哪里呀 老铁" }
+                    { pname: "OuJie Wu", comment: "Another  thursday!" },
+                    { pname: "Not Me", comment: "Where it is maan" }
                 ]
             },
             {
-                name: "2号选手",
+                name: "Ayi Li",
                 userpic: "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg",
-                content: "每天早上一杯怀姜杏仁臻白饮...",
+                content: "Another day of my life :D",
                 picUrl: ["https://img.zcool.cn/community/0195cf55792ace00000059ff8e3f7b.jpg"],
-                time: "13 mim ago",
+                time: "13 mins ago",
                 likes: [],
                 comments: [
-                    { pname: "2号选手", comment: "天空真好看" },
-                    { pname: "1号选手", comment: "你模仿我！" },
-                    { pname: "我是你爹", comment: "woca www" }
+                    { pname: "OuJie Wu", comment: "The Sky is so beatiful" },
+                    { pname: "Ayi Li", comment: "U copying me!" },
+                    { pname: "Not Me", comment: "<3" }
                 
                 ]
             }

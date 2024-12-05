@@ -11,67 +11,67 @@
         refreshing: false,
         headerClass: false,
         message: '',
-        username: '摆渡人',
+        username: 'Me',
         list: [
           {
-            "name": "1号选手",
+            "name": "OuJie Wu",
             "userpic": "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg?source=1940ef5c",
-            "content": "今天周四啦",
+            "content": "Oh Yeah",
             "picUrl": ["https://img.zcool.cn/community/017445590a8752a80121455021e118.jpg@1280w_1l_2o_100sh.jpg"],
             "videoUrl": "",
-            "time": "1小时前",
+            "time": "1 hour ago",
             "showComt": '',
-            'likes': ['摆渡人'],
+            'likes': ['Me'],
             "isLike": true,
             'showPopover': false,
             "punkt": [{
-              'pname': "1号选手",
-              "conment": "又是一个周四！"
+              'pname': "OuJieWu",
+              "conment": "Oh Yeah"
             }],
           },
           {
-            "name": "2号选手",
+            "name": "Ayi Li",
             "userpic": "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg?source=1940ef5c",
             "content": "每天早上一杯怀姜杏仁臻白饮，开脾健胃，润而不燥，还能提升身体的基础代谢～",
             "picUrl": ["https://img.zcool.cn/community/0195cf55792ace00000059ff8e3f7b.jpg@2o.jpg",
               "https://img.zcool.cn/community/017445590a8752a80121455021e118.jpg@1280w_1l_2o_100sh.jpg"
             ],
             "videoUrl": "",
-            "time": "13分钟前",
+            "time": "13 minutes ago",
             "showComt": '',
-            'likes': ['2.1选手,', '2.2选手'],
+            'likes': ['OuJie Wu,', 'Ayi Li'],
             "isLike": false,
             "punkt": [{
-              'pname': "2.3选手",
-              "conment": "天空真好看",
+              'pname': "Ayi Li",
+              "conment": "Cool",
             }],
             'showPopover': false
           },
           
           {
-            "name": "3号选手",
+            "name": "AAA",
             "userpic": "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg?source=1940ef5c",
-            "content": "天空很好看呀！",
+            "content": "Sky is so pretty",
             "picUrl": ["https://img.zcool.cn/community/0195cf55792ace00000059ff8e3f7b.jpg@2o.jpg",
               "https://img.zcool.cn/community/017445590a8752a80121455021e118.jpg@1280w_1l_2o_100sh.jpg",
               "https://img.zcool.cn/community/01a06a5796ccd20000012e7e50f0db.jpg@1280w_1l_2o_100sh.jpg",
             ],
             "videoUrl": "https://www.sicau.edu.cn/__local/A/1E/52/E8093449CF93AF4E8960C131C04_09BD5DD1_1F12F030.mp4?e=.mp4",
-            "time": "1小时前",
-            'likes': ['3.1选手,', '3.2选手,', '3.3选手,', '3.4选手,', '摆渡人'],
+            "time": "1 hour ago",
+            'likes': ['3.1选手,', '3.2选手,', '3.3选手,', '3.4选手,', 'Me'],
             "isLike": true,
             'showPopover': false,
             "punkt": [{
                 'pname': "11111",
-                "conment": "下次不要这样了"
+                "conment": "Dont't do it next time"
               },
               {
                 'pname': "22222",
-                "conment": "下次不要这样了"
+                "conment": "Don't do it next time"
               },
               {
                 'pname': "33333",
-                "conment": "谢谢你们"
+                "conment": "Thank u all <3"
               }
             ],
             "videoUrl": "https://www.sicau.edu.cn/__local/A/1E/52/E8093449CF93AF4E8960C131C04_09BD5DD1_1F12F030.mp4?e=.mp4"
@@ -103,8 +103,8 @@
           "https://t7.baidu.com/it/u=2529476510,3041785782&fm=193&f=GIF"
         ], //picurl合集
         allvideourl: ['', ''], //video合集
-        allconment: ['怎么了', "多发点，俺爱看", "高质量朋友圈", '已读不赞', '一个月又过去了', "月末提醒", '加油加油', '太可爱了吧！', "真的好浪漫"],
-        alltime: ['1小时前', '23分钟前', '45分钟前', "2023年2月3日"]
+        allconment: ['What?', "More plz", "Social media of quality", 'Good Luck', 'Sooo Cute', "So romantic"],
+        alltime: ['1 hour ago', '23 minutes ago', '45 minutes ago', "2023/2/3"]
 
       }
     },

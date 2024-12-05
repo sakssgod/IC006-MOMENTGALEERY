@@ -73,17 +73,17 @@
                               <!-- 显示一个喜欢的图标 -->
                               <div class="like-text" v-if="!item.isLike">
                                 <van-icon name="like-o" />
-                                赞
+                                Like
                               </div>
                               <div class="like-text" v-if="item.isLike">
                                 <van-icon name="like" color="red" />
-                                取消
+                                Cancel
                               </div>
                             </div>
                             <div class="like-box" :id='index' @click="operacom($event)">
                               <div class="like-text">
                                 <van-icon name="comment-o" />
-                                评论
+                                Comment
                               </div>
                             </div>
                             <van-dialog v-model="popupshow"  show-cancel-button :before-close="chargeBtn">
