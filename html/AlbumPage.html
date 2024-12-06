@@ -8,117 +8,157 @@
     <link rel="stylesheet" href="../IconFiles/icon素材/iconfont.css">
 </head>
 <body>
-    
     <div class="topnav">
         <a class="BackBtn">Back</a>
         <span class="title">My Photo Album</span>
         <a class="deleteBtn">Delete</a>
     </div>
-    
+
     <div class="album-container">
         <div class="album-item add-album">
             <div class="icon plus">&#xe605;</div>
             <div class="album-name">Create New Album</div>
         </div>
-        <div class="album-item" data-album-id="1">
-            <input type="checkbox" class="deleteCheckbox">
-            <div class="icon album">&#xe600;</div>
-            <div class="album-name">Album1</div>
-        </div>
-        <div class="album-item" data-album-id="2">
-            <input type="checkbox" class="deleteCheckbox">
-            <div class="icon album">&#xe600;</div>
-            <div class="album-name">Album2</div>
-        </div>
-        <div class="album-item" data-album-id="3">
-            <input type="checkbox" class="deleteCheckbox">
-            <div class="icon album">&#xe600;</div>
-            <div class="album-name">Album3</div>
-        </div>
-        <div class="album-item" data-album-id="4">
-            <input type="checkbox" class="deleteCheckbox">
-            <div class="icon album">&#xe600;</div>
-            <div class="album-name">Album4</div>
-        </div>
-        <div class="album-item" data-album-id="5">
-            <input type="checkbox" class="deleteCheckbox">
-            <div class="icon album">&#xe600;</div>
-            <div class="album-name">Album5</div>
+    </div>
+
+    <!-- 自定义对话框 -->
+    <div class="dialog-overlay">
+        <div class="dialog-box">
+            <h3>Enter Album Name</h3>
+            <input type="text" id="albumNameInput" placeholder="Enter album name" />
+            <br />
+            <button class="btn-confirm">Confirm</button>
+            <button class="btn-cancel">Cancel</button>
         </div>
     </div>
+
     <script>
-        const checkboxes = document.querySelectorAll('.deleteCheckbox');
+        const albumContainer = document.querySelector('.album-container');
         const deleteBtn = document.querySelector('.deleteBtn');
         const BackBtn = document.querySelector('.BackBtn');
+        const addAlbumButton = document.querySelector('.add-album');
+        const dialogOverlay = document.querySelector('.dialog-overlay');
+        const albumNameInput = document.querySelector('#albumNameInput');
+        const btnConfirm = document.querySelector('.btn-confirm');
+        const btnCancel = document.querySelector('.btn-cancel');
         
-        deleteBtn.style.visibility = 'hidden'; 
-        deleteBtn.style.pointerEvents = 'none'; 
+        deleteBtn.style.visibility = 'hidden';
+        BackBtn.style.visibility = 'hidden';
 
-        BackBtn.style.visibility = 'hidden'; 
-        BackBtn.style.pointerEvents = 'none'; 
-    
-        const albumContainer = document.querySelector('.album-container');
-        let albumCounter = albumContainer.querySelectorAll('.album-item').length - 1;
+        let albumCounter = JSON.parse(localStorage.getItem('albums'))?.length || 0;
 
-        const bindCheckboxEvent = (checkbox) => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const albums = JSON.parse(localStorage.getItem('albums')) || [];
+            
+            albums.forEach(album => {
+                createAlbumElement(album.id, album.name);
+            });
+        });
+
+        addAlbumButton.addEventListener('click', () => {
+            dialogOverlay.style.display = 'flex';
+            albumNameInput.value = ''; 
+        });
+
+        btnConfirm.addEventListener('click', () => {
+            const albumName = albumNameInput.value.trim();
+
+            if (albumName === "") {
+                alert("Album name cannot be empty.");
+                return;
+            }
+
+            const existingAlbums = JSON.parse(localStorage.getItem('albums')) || [];
+            if (existingAlbums.some(album => album.name === albumName)) {
+                alert("An album with this name already exists.");
+                return;
+            }
+
+            albumCounter++;
+            const newAlbum = { id: albumCounter, name: albumName };
+            createAlbumElement(newAlbum.id, newAlbum.name);
+
+            existingAlbums.push(newAlbum);
+            localStorage.setItem('albums', JSON.stringify(existingAlbums));
+
+            dialogOverlay.style.display = 'none';
+        });
+
+        btnCancel.addEventListener('click', () => {
+            dialogOverlay.style.display = 'none';
+        });
+
+        function createAlbumElement(albumId, albumName) {
+            const newAlbum = document.createElement('div');
+            newAlbum.classList.add('album-item');
+            newAlbum.setAttribute('data-album-id', albumId);
+            newAlbum.innerHTML = `
+                <input type="checkbox" class="deleteCheckbox">
+                <div class="icon album">&#xe600;</div>
+                <div class="album-name">${albumName}</div>
+            `;
+            albumContainer.appendChild(newAlbum);
+
+            newAlbum.addEventListener('click', (event) => {
+                if (event.target.classList.contains('deleteCheckbox')) return;
+                window.location.href = `InsideAlbum.html?albumId=${albumId}&albumName=${encodeURIComponent(albumName)}`;
+            });
+
+            const newCheckbox = newAlbum.querySelector('.deleteCheckbox');
+            bindCheckboxEvent(newCheckbox);
+        }
+
+        function bindCheckboxEvent(checkbox) {
             checkbox.addEventListener('change', () => {
                 const anyChecked = Array.from(document.querySelectorAll('.deleteCheckbox')).some(cb => cb.checked);
                 deleteBtn.style.visibility = anyChecked ? 'visible' : 'hidden';
-                deleteBtn.style.pointerEvents = anyChecked ? 'auto' : 'none';
             });
-        };
-
-        const bindAlbumClickEvent = (album) => {
-            album.addEventListener('click', (event) => {
-                if (event.target.classList.contains('deleteCheckbox')) return;
-
-                const albumName = album.querySelector('.album-name').textContent;
-                const albumId = album.getAttribute('data-album-id') || 'new';
-                window.location.href = `InsideAlbum.html?albumId=${albumId}&albumName=${encodeURIComponent(albumName)}`;
-            });
-        };
-
-        document.querySelectorAll('.deleteCheckbox').forEach(bindCheckboxEvent);
-
-        document.querySelectorAll('.album-item:not(.add-album)').forEach(bindAlbumClickEvent);
+        }
 
         deleteBtn.addEventListener('click', () => {
-            const selectedCount = document.querySelectorAll('.deleteCheckbox:checked').length;
-            if (selectedCount === 1) {
-                const albumName = document.querySelector('.deleteCheckbox:checked').closest('.album-item').querySelector('.album-name').textContent;
-                if (confirm(`Are you sure you want to delete the album "${albumName}"?`)) {
-                    document.querySelectorAll('.deleteCheckbox:checked').forEach(cb => cb.closest('.album-item').remove());
-                    deleteBtn.style.visibility = 'hidden';
-                    deleteBtn.style.pointerEvents = 'none';
-                }
-            } else if (selectedCount > 1) {
-                if (confirm(`Are you sure you want to delete ${selectedCount} albums?`)) {
-                    document.querySelectorAll('.deleteCheckbox:checked').forEach(cb => cb.closest('.album-item').remove());
-                    deleteBtn.style.visibility = 'hidden';
-                    deleteBtn.style.pointerEvents = 'none';
-                }
-            }
+            const selectedAlbums = document.querySelectorAll('.deleteCheckbox:checked');
+            if (selectedAlbums.length === 0) return;
+
+            let albums = JSON.parse(localStorage.getItem('albums')) || [];
+
+            // 获取选中相册的 ID 和名称
+            const albumsToDelete = Array.from(selectedAlbums).map(checkbox => {
+                const albumItem = checkbox.closest('.album-item');
+                const albumId = Number(albumItem.getAttribute('data-album-id'));
+                const album = albums.find(a => a.id === albumId);
+                return album ? { id: albumId, name: album.name } : null;
+            }).filter(Boolean);
+
+            // 确认删除提示
+            const albumNames = albumsToDelete.map(album => album.name);
+            const confirmMessage = albumsToDelete.length === 1
+                ? `Are you sure you want to delete the album "${albumNames[0]}"?`
+                : `Are you sure you want to delete these albums and their photos: ${albumNames.join(', ')}?`;
+
+            if (!confirm(confirmMessage)) return;
+
+            // 删除选中相册和相关照片数据
+            albumsToDelete.forEach(album => {
+                // 从相册列表中移除
+                albums = albums.filter(a => a.id !== album.id);
+
+                // 删除与相册名称相关的照片数据
+                localStorage.removeItem(album.name);
+            });
+
+            // 更新 localStorage 中的相册数据
+            localStorage.setItem('albums', JSON.stringify(albums));
+
+            // 从 DOM 中移除选中相册
+            selectedAlbums.forEach(checkbox => {
+                const albumItem = checkbox.closest('.album-item');
+                albumItem.remove();
+            });
+
+            // 更新删除按钮状态
+            deleteBtn.style.visibility = 'hidden';
         });
 
-        document.querySelector('.album-container').addEventListener('click', (event) => {
-    
-            if (event.target.closest('.album-item.add-album')) {
-                albumCounter++; 
-                const newAlbum = document.createElement('div');
-                newAlbum.classList.add('album-item');
-                newAlbum.setAttribute('data-album-id', albumCounter);
-                newAlbum.innerHTML = `
-                    <input type="checkbox" class="deleteCheckbox">
-                    <div class="icon album">&#xe600;</div>
-                    <div class="album-name">Album${albumCounter}</div>
-                `;
-                albumContainer.appendChild(newAlbum);
-
-                const newCheckbox = newAlbum.querySelector('.deleteCheckbox');
-                bindCheckboxEvent(newCheckbox);
-                bindAlbumClickEvent(newAlbum); 
-            }
-        });
     </script>
 </body>
 </html>
