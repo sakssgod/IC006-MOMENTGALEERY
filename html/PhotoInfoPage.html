@@ -80,7 +80,27 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.title').textContent = photoName;
     }
 });
+ document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const photoName = params.get('photoName');
+            const albumName = params.get('albumName');
 
+            if (photoName) {
+                const slides = document.getElementsByClassName("Slides");
+                for (let i = 0; i < slides.length; i++) {
+                    if (slides[i].getAttribute('data-photo-name') === photoName) {
+                        slideIndex = i + 1;
+                        showSlides(slideIndex);
+                        break;
+                    }
+                }
+            }
+
+            const backButton = document.querySelector('.topnav a[href="InsideAlbum.html"]');
+            if (albumName) {
+                backButton.href = `InsideAlbum.html?albumName=${encodeURIComponent(albumName)}`;
+            }
+        });
 </script>
 
 </body>
