@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Albums</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <section class="albums">
+            <h3>Most Recent Albums</h3>
+            <div class="album-list">
+                <div class="album-item">
+                    <div class="folder-icon">📁</div>
+                    <div class="album-count">123</div>
+                </div>
+                <div class="album-item">
+                    <div class="folder-icon">📁</div>
+                    <div class="album-count">1</div>
+                </div>
+                <div class="album-item">
+                    <div class="folder-icon">📁</div>
+                    <div class="album-count">0</div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="photos">
+            <h3>Photo Gallery</h3>
+            <div id="photo-grid" class="photo-grid">
+                <!-- JS will populate this -->
+            </div>
+        </section>
+    </main>
+
+    <button class="floating-button">+</button>
+    <script src="script.js"></script>
+</body>
+</html>

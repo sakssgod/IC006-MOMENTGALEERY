@@ -1,0 +1,92 @@
+.upload-container {
+    text-align: center;
+    padding: 100px;
+    border: 2px dashed #d9d9d9;
+    border-radius: 10px;
+    width: 350px;
+    background-color: var(--shell-color);
+    position: relative;
+    cursor: pointer;
+}
+
+.upload-container:hover {
+    border-color: #3399ff;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #999;
+}
+
+.upload-text {
+    font-size: 16px;
+    color: #666;
+    margin: 20px;
+}
+
+.upload-button-group {
+    display: inline-flex;
+    align-items: center;
+    height: 35px;
+    width: 200px;
+}
+
+.upload-button {
+    background-color: #3399ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+    height: 100%;
+    width: 75%;
+}
+
+.upload-button:hover {
+    background-color: #287bc4; /* 鼠标悬停时的颜色 */
+    color: #ffffff; /* 保持文字为白色 */
+}
+
+.dropdown-arrow {
+    background-color: #3399ff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 50px;
+    height: 100%;
+    width: 100%;
+}
+
+.dropdown-arrow:hover {
+    background-color: #287bc4; /* 鼠标悬停时的颜色 */
+    color: #ffffff; /* 保持文字/图标为白色 */
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    width: 200px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 5px 0;
+    margin-top: 45%;
+}
+
+.dropdown-item {
+    padding: 10px;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f5;
+}

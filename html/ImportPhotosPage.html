@@ -7,131 +7,97 @@
     <link rel="stylesheet" href="../style/ImportPhotosPage.css"> <!-- 引入外部 CSS 文件 -->
     <link rel="stylesheet" href="../IconFiles/jiantou/iconfont.css">
     <link rel="stylesheet" href="../IconFiles/idw/font_4742343_jpqqywp4zb/iconfont.css">
+    <link rel="stylesheet" href="../IconFiles/font_4742343_i01w1s70jxa/iconfont.css">
     <link rel="stylesheet" href="../style/CriarAlbumName.css">
     
 </head>
 <body>
 
 
-    <div class="upload-container" onclick="openFileExplorer()">
-        <div class="upload-icon">+</div>
-        <div class="upload-text">Update Your Image</div>
-        <div class="upload-button-group">
-            <button class="dropdown-arrow" onclick="toggleDropdown(event)">
-                UPDATE<i class="iconfont icon-arrow-down toggle"></i>
-            </button>
+
     
-            <div class="dropdown-menu" id="dropdownMenu">
-                <div class="dropdown-item" onclick="importFromComputer()">
-                    <i class="iconfont icon-pc"></i> From PC
-                </div>
-                <div class="dropdown-item" onclick="importFromCloud()">
-                    <i class="iconfont icon-cloud-upload"></i> From Cloud
-                </div>
-                <div class="dropdown-item" onclick="importFromDropbox()">
-                    <i class="iconfont icon-instagram"></i> From Instagram
-                </div>
-                <div class="dropdown-item" onclick="importFromFacebook()">
-                    <i class="iconfont icon-facebook1"></i> From Facebook
+    <main>
+        <section class="updateANDpicture">
+            <h3>Welcome to Momento Gallery</h3>
+            <div class="updateAreaAndElse">
+                <div class="upload-container" onclick="openFileExplorer()">
+                    <div class="upload-icon">+</div>
+
+                    <div class="upload-button-group">
+                        <button class="dropdown-arrow" onclick="toggleDropdown(event)">
+                            UPDATE<i class="iconfont icon-arrow-down toggle"></i>
+                        </button>
+                
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <div class="dropdown-item" onclick="changeTheme('pc')">
+                                <i class="iconfont icon-pc"></i> From PC
+                            </div>
+                            <div class="dropdown-item" onclick="changeTheme('cloud')">
+                                <i class="iconfont icon-cloud-upload"></i> From Cloud
+                            </div>
+                            <div class="dropdown-item" onclick="changeTheme('instagram')">
+                                <i class="iconfont icon-instagram"></i> From Instagram
+                            </div>
+                            <div class="dropdown-item" onclick="changeTheme('facebook')">
+                                <i class="iconfont icon-facebook1"></i> From Facebook
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
+           
+        </section>
+
+        <hr>
+
+        <section class="photos">
+            <h3>Photo Gallery</h3>
+            <div id="photo-grid" class="photo-grid">
+                <!-- JS will populate this -->
+            </div>
+        </section>
+    </main>
+
+
 
     <div id="overlay" class="overlay" onclick="closeFileExplorer()"></div>
 
     <div class="file-explorer" id="fileExplorer">
         <!-- Top Navigation Bar -->
-        <div class="top-bar">
-            <button class="nav-button">Back</button>
-            <button class="nav-button">Forward</button>
-            <button class="nav-button">Refresh</button>
+        <div class="top-bar" style="padding-left: 20px; margin: 20px; border-radius: 20px;" >
+
+            <div class="theme-changer">
+                <i class="iconfont icon-facebook1"></i><h2>: Facebook</h2>
+            </div>
             <button class="close-button" onclick="closeFileExplorer()">X</button>
 
         </div>
     
-        <div class="file-display">
-            <!-- Home Column -->
-            <div class="home-column">
-                <div class="home-item">Home</div>
-                <div class="home-item">Desktop</div>
-                <div class="home-item">Documents</div>
-                <div class="home-item">Downloads</div>
-                <div class="home-item">Music</div>
-                <div class="home-item">Pictures</div>
-                <div class="home-item">Videos</div>
-            </div>
+
     
             <!-- File List -->
             <div class="outer-file">
                 <div class="file-list">
-                    <div class="file-list2">
-                        <div class="file-item">
-                            <div class="file-item-for-input-checkbox">
-                                <img src="../表情包 emoji/images (1).jpg" alt="Folder"> 
-                                <p>Desktop</p>
-                                <input type="checkbox" class="inputboxforimg">
-                            </div>
-                        </div>
-                        <div class="file-item"><img src="../表情包 emoji/images (2).jpg" alt="Folder"> <p>Documents</p></div>
-                        <div class="file-item"><img src="../表情包 emoji/images.jpg" alt="Folder"><br>Downloads</div>
-                        <div class="file-item"><img src="../表情包 emoji/下载 (1).jpg" alt="Folder"><br>Music</div>
-                        <div class="file-item"><img src="../表情包 emoji/下载 (2).jpg" alt="Folder"><br>Pictures</div>
-                        <div class="file-item"><img src="../表情包 emoji/下载 (3).jpg" alt="File"><br>.bashrc</div>
-                        <div class="file-item"><img src="../表情包 emoji/下载 (4).jpg" alt="File"><br>.profiledasdasdsa</div>
-                        <div class="file-item"><img src="../表情包 emoji/下载 (5).jpg" alt="File"><br>example.txt</div>
+                    <div class="file-list2" id="fileGrid">
+                        <!-- JS 动态生成图片和复选框 -->
                     </div>
                 </div>
+
+                
     
                 <div class="bottom-open-cancele">
-                    <button class="bottom-button" onclick="closeFileExplorer()">Open</button>
-                    <button class="bottom-button" onclick="closeFileExplorer()">Cancel</button>
+                    <div id="selectAllButton" class="bottom-button" onclick="toggleSelectAll(event)">Select All</div>
+                    <div class="right-buttons">
+                        <button class="bottom-button" onclick="closeFileExplorer()">Open</button>
+                        <button class="bottom-button" onclick="closeFileExplorer()">Cancel</button>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
     
-    <div class="navbar">
-        <!-- 上部部分：图片和打开图片的图标 -->
-        <div class="outer-shell">
-            <div class="navbar-top">
-                <div class="warning-add-containeir" id="warningAddContainer">
-                    <span class="icon-add">+</span>
-                    <span class="please-add-img">Add Image</span>
-                </div>
-                <div class="thumbnail-container hidden">
-                    <img src="../表情包 emoji/images (2).jpg" alt="图片缩略图" class="thumbnail">
-                    <img src="../表情包 emoji/images.jpg" alt="图片缩略图" class="thumbnail">
-                    <img src="../表情包 emoji/下载 (1).jpg" alt="图片缩略图" class="thumbnail">
- 
-                </div>
-                <button class="open-button" onclick="openIframe('EscolherCritWindow.html')"><i class=" iconfont  "></i>Definir Criterios</button>
-            </div>
-        </div>
-        
-        
-        <!-- 底部部分：进度条和删除按钮 -->
-        <div class="outer-shell-bottom">
-            <div class="navbar-bottom">
-                <progress class="progress-bar" value="0" max="50"></progress>
-                <div class="ok">
-                    <span>0/50</span>
-                    <button class="delete-button">
-                        <i class="iconfont icon-lajixiang"></i>Delete
-                    </button>
-                </div>
-            </div>
-        </div>
-         
-         
-         <div class="bottom-line">
-            <button class="ajuda">
-                <i class=" iconfont icon-pc"></i> Help
-            </button>
-        </div>
-        
-    </div>
+
 
     <div id="iframeContainer" style="display: none; position: fixed; top: 10%; left: 10%; width: auto; height: auto; border: 1px solid #ddd; border-radius: 10px; background-color: white; z-index: 1000;" scrolling="no">
         <iframe id="criteriosIframe" src="" style="width: auto; height: auto; border: none;" scrolling="no"></iframe>

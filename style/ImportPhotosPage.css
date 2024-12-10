@@ -1,8 +1,7 @@
 
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
+
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
@@ -27,24 +26,45 @@ body {
     --text-color: #ccc;
 }
 
+
+
+main{
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 100%;
+    border: 1px solid red;
+
+}
+
 .upload-container {
+
     text-align: center;
-    padding: 100px;
     border: 2px dashed #d9d9d9;
     border-radius: 10px;
-    width: 350px;
+    width: 240px;
+    height: 200px;
     background-color: var(--shell-color);
     position: relative;
     cursor: pointer;
+    margin-left: 20px;
+
+    /* 使用 Flexbox 居中内容 */
+    display: flex;
+    flex-direction: column; /* 子元素按列排列 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
 }
+
+
 
 .upload-container:hover {
     border-color: #3399ff;
 }
 
 .upload-icon {
-    font-size: 48px;
+    font-size: 80px;
     color: #999;
+
 }
 
 .upload-text {
@@ -57,7 +77,8 @@ body {
     display: inline-flex;
     align-items: center;
     height: 35px;
-    width: 200px;
+    width: 150px;
+    
 }
 
 .upload-button {
@@ -67,7 +88,6 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 5px;
     height: 100%;
     width: 75%;
 }
@@ -106,7 +126,8 @@ body {
     border-radius: 8px;
     z-index: 1000;
     padding: 5px 0;
-    margin-top: 45%;
+    top: 5px;
+    left: 250px;
 }
 
 .dropdown-item {
@@ -122,8 +143,8 @@ body {
 
 /* Linux File Explorer Mockup */
 .file-explorer {
-    width: 650px;
-    height: 500px;
+    width: 900px;
+    height: 900px;
     background-color: #222;
     border-radius: 10px;
     overflow: hidden;
@@ -173,24 +194,7 @@ body {
     background-color: #666;
 }
 
-.home-column {
-    width: 25%;
-    background-color: #3b3b3b;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.home-column .home-item {
-    padding: 10px;
-    color: #f5f5f5;
-    cursor: pointer;
-}
-
-.home-column .home-item:hover {
-    background-color: #666;
-}
 
 .file-display {
     flex-grow: 1;
@@ -199,13 +203,14 @@ body {
 }
 
 .outer-file {
-    width: 80%;
+    width: 100%;
+    height: 100%;
 }
 
 .file-list {
-    width: auto;
-    height: 80%;
-    padding: 15px;
+    width: 100%;
+    height: 76%;
+    padding: 15px 15px 15px 0px;
     display: flex;
     background-color: #222;
     overflow-y: auto;
@@ -213,56 +218,98 @@ body {
 }
 
 .file-list2 {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    padding: 10px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 类似 main 的布局 */
     gap: 20px;
+    padding: 10px;
+    width: 100%; /* 确保宽度占满父容器 */
 }
 
-.file-item-for-input-checkbox{
+.file-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-photo {
     position: relative;
-}
-
-.inputboxforimg{
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    border: 1px solid #666;
-    border-radius: 50%;
-    height: 20px;
-    width: 20px;
-}
-
-.file-list .file-item {
-    max-width: 120px;
-    height: auto;
+    overflow: hidden;
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff; /* 背景色 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
     text-align: center;
-    color: #f5f5f5;
-    cursor: pointer;
 }
 
-.file-list .file-item img {
-    width: 120px;
-    height: 120px;
-    border-radius: 5px;
-    border: 5px solid grey;
+.file-photo img {
+
+    width: 100px; /* 限制图片最大宽度 */
+    height: 110px; 
+    border-radius: 8px; /* 保持与容器一致的圆角 */
+    transition: transform 0.3s ease;
 }
 
-.file-list .file-item:hover {
+.file-photo img:hover {
+    /* transform: scale(1.1); Hover 放大效果 */
     opacity: 0.8;
 }
 
+.file-photo-description {
+    margin-top: 14px;
+    font-size: 14px;
+    color: #333;
+    text-overflow: ellipsis; /* 文字超出显示省略号 */
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.file-checkbox-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.file-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+
+
 .bottom-open-cancele {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between; /* 左右对齐 */
+    align-items: center;
     padding: 10px;
-    gap: 10px;
     border-top: 3px solid black;
 }
 
-.bottom-open-cancele .bottom-button {
+.left-buttons {
+    display: flex; /* 左侧按钮容器 */
+    align-items: center;
+}
+
+.right-buttons {
+    display: flex; /* 右侧按钮容器 */
+    align-items: center;
+    gap: 10px; /* 按钮之间的间距 */
+}
+
+.bottom-button {
     background-color: #444;
     color: #f5f5f5;
     padding: 10px 20px;
@@ -271,9 +318,10 @@ body {
     cursor: pointer;
 }
 
-.bottom-open-cancele .bottom-button:hover {
+.bottom-button:hover {
     background-color: #555;
 }
+
 
 
 .navbar {
@@ -508,5 +556,135 @@ body {
 .file-explorer {
     z-index: 1000; /* 高于遮罩层 */
 }
+
+/* main下面照片的部分 */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    
+}
+
+.photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff; /* 背景色 */
+    display: flex; /* 使用 flexbox */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    padding: 10px; /* 内边距 */
+    text-align: center;
+    flex-direction: column;
+
+}
+
+.photo img {
+    width: 240px; /* 限制图片最大宽度 */
+    height: 220px; /* 限制图片最大高度 */
+    transition: transform 0.3s ease;
+    border-radius: 8px; /* 保持与容器一致的圆角 */
+
+}
+
+.photo img:hover {
+    transform: scale(1.1); /* Hover effect for zoom-in */
+}
+
+
+.photo-description {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #333;
+    overflow: hidden; /* 隐藏超出的部分 */
+    text-overflow: ellipsis; /* 使用省略号表示被隐藏的文本 */
+    white-space: nowrap; /* 单行显示，去掉换行 */
+    max-width: 150px; /* 设置最大宽度 */
+}
+
+.photo-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 8px;
+    background-color: var(--primary-color-light);
+    border-top: 1px solid var(--primary-color);
+    padding: 5px;
+    width: 100%;
+}
+
+.photo-icons i {
+    font-size: 30px; /* 图标大小 */
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+    
+}
+
+.photo-icons i:hover {
+    transform: scale(1.4); /* 放大效果 */
+}
+
+.theme-changer {
+    display: flex; /* 使用 flex 布局 */
+    align-items: center; /* 垂直居中 */
+    gap: 10px; /* 设置图标与文本之间的间距 */
+}
+
+/* 基础样式 */
+.theme-changer i {
+    transition: color 0.3s ease, font-size 0.3s ease; /* 平滑过渡效果 */
+}
+
+.theme-changer h2 {
+    transition: color 0.3s ease, font-size 0.3s ease;
+}
+
+/* PC 样式 */
+.theme-changer.pc i {
+    font-size: 30px; /* 调整 PC 图标大小 */
+    color: #0078d4;
+}
+
+.theme-changer.pc h2 {
+    font-size: 20px; /* 调整 PC 字体大小 */
+    color: #0078d4;
+}
+
+/* Cloud 样式 */
+.theme-changer.cloud i {
+    font-size: 30px; /* 调整 Cloud 图标大小 */
+    color: #28a745;
+}
+
+.theme-changer.cloud h2 {
+    font-size: 22px; /* 调整 Cloud 字体大小 */
+    color: #28a745;
+}
+
+/* Instagram 样式 */
+.theme-changer.instagram i {
+    font-size: 30px; /* 调整 Instagram 图标大小 */
+    color: #e4405f;
+}
+
+.theme-changer.instagram h2 {
+    font-size: 24px; /* 调整 Instagram 字体大小 */
+    color: #e4405f;
+}
+
+/* Facebook 样式 */
+.theme-changer.facebook i {
+    font-size: 30px; /* 调整 Facebook 图标大小 */
+    color: #1877f2;
+}
+
+.theme-changer.facebook h2 {
+    font-size: 21px; /* 调整 Facebook 字体大小 */
+    color: #1877f2;
+}
+
+
 
 

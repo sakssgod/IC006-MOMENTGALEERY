@@ -1,0 +1,81 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Albums section */
+.albums {
+    margin-bottom: 20px;
+}
+
+.album-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.album-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+}
+
+.folder-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.album-count {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Photos section */
+.photos {
+    margin-top: 20px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 20px;
+}
+
+.photo-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Floating button */
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f04;
+    color: white;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.floating-button:hover {
+    background-color: #d03;
+}
