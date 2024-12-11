@@ -18,21 +18,75 @@ const fileExplorer = document.getElementById('fileExplorer');
 const warningAddContainer = document.getElementById('warningAddContainer');
 const overlay = document.getElementById('overlay');
 
-// 为 open 按钮添加事件监听器
-document.querySelector('.bottom-open-cancele .bottom-button:first-child').addEventListener('click', function () {
-    const thumbnailContainer = document.querySelector('.thumbnail-container');
-    if (thumbnailContainer) {
-        thumbnailContainer.style.display = 'block'; // 显示图片容器
-    }
-    fileExplorer.style.display = 'none'; // 隐藏 file-explorer
-    warningAddContainer.style.display = 'none';
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // 获取按钮引用
+    const selectAllButton = document.getElementById("selectAllButton");
+    const openButton = document.getElementById("openButton");
+    const cancelButton = document.getElementById("cancelButton");
+
+    // 绑定 Select All 按钮事件
+    selectAllButton.addEventListener("click", (event) => {
+        event.stopPropagation(); // 阻止事件冒泡
+        toggleSelectAll(event); // 调用全选/取消全选逻辑
+    });
+
+    // 绑定 Open 按钮事件
+    openButton.addEventListener("click", () => {
+        
+        // 打开 EscolherCritWindow
+        if (iframeContainer && criteriosIframe) {
+            criteriosIframe.src = "../html/EscolherCritWindow.html"; // 设置 EscolherCritWindow 的路径
+            iframeContainer.style.display = 'block'; // 显示 iframe 容器
+        }
+        fileExplorer.style.display = 'none'; // 隐藏 file-explorer
+
+        
+
+        console.log("Open button clicked. This is the new logic placeholder.");
+
+
+        // 记录勾选的文件信息
+        const checkboxes = document.querySelectorAll('.file-checkbox'); // 获取所有复选框
+        const selectedFiles = []; // 用于保存选中项的详细信息
+
+        checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+                const fileItem = checkbox.closest('.file-item'); // 获取对应的 file-item 容器
+                if (fileItem) {
+                    const img = fileItem.querySelector('img'); // 获取图片元素
+                    const description = fileItem.querySelector('.file-photo-description'); // 获取描述元素
+
+                    // 使用 `img.getAttribute('src')` 获取原始路径
+                    const originalSrc = img ? img.getAttribute('src') : null;
+
+                    // 保存文件信息到列表中
+                    selectedFiles.push({
+                        id: fileItem.id, // file-item 的 ID
+                        src: originalSrc, // 图片原始路径
+                        name: description ? description.textContent : null, // 文件名
+                    });
+                }
+            }
+        });
+
+        // 将选中文件信息存储到 localStorage
+        localStorage.setItem('selectedFiles', JSON.stringify(selectedFiles));
+
+        // 打印到控制台作为验证
+        console.log("Selected files stored in localStorage:", selectedFiles);
+
+        // TODO: 如果有进一步逻辑可以在这里实现
+    });
+
+    // 绑定 Cancel 按钮事件
+    cancelButton.addEventListener("click", () => {
+        fileExplorer.style.display = 'none'; // 隐藏文件浏览器
+    });
 });
 
 
-// 为 cancele 按钮添加事件监听器
-document.querySelector('.bottom-open-cancele .bottom-button:last-child').addEventListener('click', function () {
-    fileExplorer.style.display = 'none'; // 隐藏 file-explorer
-});
 
 
 overlay.classList.add('overlay');
@@ -110,20 +164,6 @@ const loadingModal = document.getElementById('loading-modal');
 const successModal = document.getElementById('success-modal');
 
 
-// 为 Open 按钮添加新逻辑
-document.querySelector('.bottom-open-cancele .bottom-button:first-child').addEventListener('click', function () {
-    const thumbnailContainer = document.querySelector('.thumbnail-container');
-    if (thumbnailContainer) {
-        thumbnailContainer.style.display = 'block'; // 显示图片容器
-    }
-    // 打开 EscolherCritWindow
-    if (iframeContainer && criteriosIframe) {
-        criteriosIframe.src = "../html/EscolherCritWindow.html"; // 设置 EscolherCritWindow 的路径
-        iframeContainer.style.display = 'block'; // 显示 iframe 容器
-    }
-    fileExplorer.style.display = 'none'; // 隐藏 file-explorer
-    warningAddContainer.style.display = 'none';
-});
 
 
 // 监听来自子页面的消息
@@ -251,30 +291,39 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     // 动态生成图片和复选框
-    files.forEach(file => {
+    files.forEach((file, index) => {
+        const fileId = index + 1; // 文件编号，从 1 开始
+
         const fileDiv = document.createElement("div");
         fileDiv.classList.add("file-item");
+        fileDiv.id = `file-item-${fileId}`; // 设置 file-item 的 id
 
         // 创建图片容器
         const imgContainer = document.createElement("div");
         imgContainer.classList.add("file-photo");
+        imgContainer.id = `file-photo-${fileId}`; // 设置图片容器的 id
 
         // 创建图片
         const imgElement = document.createElement("img");
         imgElement.src = file.src;
         imgElement.alt = file.name;
+        imgElement.id = `img-${fileId}`; // 设置图片的 id
 
         // 创建标题
         const fileTitle = document.createElement("div");
         fileTitle.classList.add("file-photo-description");
+        fileTitle.id = `file-photo-description-${fileId}`; // 设置标题的 id
         fileTitle.textContent = file.name;
 
         // 创建右上角复选框
         const checkboxContainer = document.createElement("div");
         checkboxContainer.classList.add("file-checkbox-container");
+        checkboxContainer.id = `file-checkbox-container-${fileId}`; // 设置复选框容器的 id
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.classList.add("file-checkbox");
+        checkbox.id = `file-checkbox-${fileId}`; // 设置复选框的 id
 
         // 添加复选框到右上角容器
         checkboxContainer.appendChild(checkbox);
@@ -333,6 +382,7 @@ function changeTheme(platform) {
         default:
             console.error('Unknown platform:', platform);
     }
+
 }
 
 
