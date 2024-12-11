@@ -310,7 +310,11 @@
             <div class="filter-section">
                 <div class="filter-header">Person</div>
                 <ul class="filter-options">
-                    <li><input type="checkbox"> Friend</li>
+                    <li><input type="checkbox"> Bride</li>
+                    <li><input type="checkbox"> Groom</li>
+                    <li><input type="checkbox"> Bridesmaid</li>
+                    <li><input type="checkbox"> Best Man</li>
+                    <li><input type="checkbox"> Flower Girl</li>
                     <li><input type="checkbox"> Family</li>
                     <li><input type="checkbox"> Colleague</li>
                     <li><input type="checkbox"> Neighbor</li>
@@ -353,7 +357,12 @@
                 <div class="filter-header">Scenery</div>
                 <ul class="filter-options">
                     <li><input type="checkbox"> Mountain</li>
-                    <li><input type="checkbox"> Beach</li>
+                    <li><input type="checkbox"> Wedding</li>
+                    <li><input type="checkbox"> Carnival</li>
+                    <li><input type="checkbox"> Christmas</li>
+                    <li><input type="checkbox"> Concert</li>
+                    <li><input type="checkbox"> Football Match</li>
+                    <li><input type="checkbox"> Room Party</li>
                     <li><input type="checkbox"> Forest</li>
                     <li><input type="checkbox"> Desert</li>
                     <li><input type="checkbox"> River</li>
@@ -367,15 +376,15 @@
 
 
             <div class="filter-section">
-                <div class="filter-header">Color</div>
+                <div class="filter-header">Filter</div>
                 <ul class="filter-options">
-                    <li><input type="checkbox"> Red</li>
-                    <li><input type="checkbox"> Blue</li>
-                    <li><input type="checkbox"> Green</li>
-                    <li><input type="checkbox"> Yellow</li>
-                    <li><input type="checkbox"> Black</li>
-                    <li class="hidden-option"><input type="checkbox"> White</li>
-                    <li class="hidden-option"><input type="checkbox"> Purple</li>
+                    <li><input type="checkbox"> Black & White</li>
+                    <li><input type="checkbox"> Bright</li>
+                    <li><input type="checkbox"> Dreamy</li>
+                    <li><input type="checkbox"> High Contrast</li>
+                    <li><input type="checkbox"> Soft Glow</li>
+                    <li class="hidden-option"><input type="checkbox"> Minimalist</li>
+                    <li class="hidden-option"><input type="checkbox"> Pop Art</li>
                 </ul>
                 <div class="show-toggle" onclick="toggleOptions()">Show more</div>
                 <hr>
@@ -426,7 +435,7 @@
 
     <div class="lks123">
         <div class="product-header">
-            <h3>97 items found</h3>
+            <div id="itemsFound">30 items found</div>
             <button class="cruz">x</button>
         </div>
 
@@ -547,6 +556,77 @@
     // 通知父页面关闭iframe并显示modal-pack
     window.parent.postMessage({ action: 'openModalPack' }, '*');
     });
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const productList = document.querySelector(".product-list");
+    const itemsFound = document.querySelector("#itemsFound"); // 假设 HTML 中有一个显示项目数量的元素
+
+    // 从 localStorage 获取选中的文件数据
+    const selectedFiles = JSON.parse(localStorage.getItem("selectedFiles")) || [];
+
+    // 更新 itemsFound 的内容
+    if (itemsFound) {
+        itemsFound.textContent = `${selectedFiles.length} items found`;
+    }
+
+    // 清空当前的产品列表
+    productList.innerHTML = "";
+
+    // 动态生成产品项
+    selectedFiles.forEach((file, index) => {
+        const productItem = document.createElement("div");
+        productItem.classList.add("product-item");
+
+        // 创建图片区域
+        const productImage = document.createElement("div");
+        productImage.classList.add("product-image");
+        if (file.src) {
+            const imgElement = document.createElement("img");
+            imgElement.src = file.src;
+            imgElement.alt = file.name || `Image ${index + 1}`;
+            productImage.appendChild(imgElement);
+        } else {
+            productImage.textContent = "📷"; // 如果没有图片路径，显示默认图标
+        }
+
+        // 创建信息区域
+        const productInfo = document.createElement("div");
+        productInfo.classList.add("product-info");
+
+        const productName = document.createElement("div");
+        productName.classList.add("product-name");
+        productName.textContent = file.name || "Unnamed File";
+
+        // 生成随机文件大小
+        const randomSize = (Math.random() * (5.8 - 3) + 3).toFixed(2);
+
+        // 文件大小显示
+        const productSize = document.createElement("div");
+        productSize.classList.add("product-size");
+        productSize.textContent = `${randomSize} MB`;
+
+        // 将信息区域组合
+        productInfo.appendChild(productName);
+        productInfo.appendChild(productSize);
+
+        // 将图片和信息添加到产品项
+        productItem.appendChild(productImage);
+        productItem.appendChild(productInfo);
+
+        // 添加到产品列表
+        productList.appendChild(productItem);
+    });
+
+    // 如果没有选中文件，显示提示信息
+    if (selectedFiles.length === 0) {
+        const emptyMessage = document.createElement("div");
+        emptyMessage.textContent = "No files selected.";
+        emptyMessage.style.textAlign = "center";
+        emptyMessage.style.color = "#666";
+        productList.appendChild(emptyMessage);
+    }
+});
+
 
 
 

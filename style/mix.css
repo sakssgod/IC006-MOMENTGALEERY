@@ -5,8 +5,8 @@ body {
 }
 
 .body-container{
-    width: 100%;
-    height: 120vh;
+    width: 1280px;
+    height: 720px;
 }
 
 /* Flexbox 容器样式 */
@@ -40,5 +40,4 @@ iframe {
     width: 100%;
     height: 70px;
     border-bottom: 2px solid whitesmoke;
-
 }
