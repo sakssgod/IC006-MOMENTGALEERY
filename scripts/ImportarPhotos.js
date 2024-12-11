@@ -185,17 +185,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 示例照片列表，包含描述信息
     const photos = [
-        { src: "/IC006-MOMENTGALEERY/风景照片/1.jpg", alt: "Photo 1", description: "Lagoa" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/2.jpg", alt: "Photo 2", description: "mardasdasdasdsa" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/3.webp", alt: "Photo 3", description: "sdaas" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/4.jpg", alt: "Photo 4", description: "dasdsadas" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/5.jpg", alt: "Photo 5", description: "dasdsa" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/6.jpg", alt: "Photo 6", description: "dsadas" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/7.jpg", alt: "Photo 7", description: "fff" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/8.jpg", alt: "Photo 8", description: "ffff" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/9.jpg", alt: "Photo 9", description: "ffff" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/10.jpg", alt: "Photo 10", description: "Guimardassad" },
-        { src: "/IC006-MOMENTGALEERY/风景照片/11.jpg", alt: "Photo 11", description: "dasdsad" },
+        { src: "../风景照片/1.jpg", alt: "Photo 1", description: "Lagoa" },
+        { src: "../风景照片/2.jpg", alt: "Photo 2", description: "Estrada" },
+        { src: "../风景照片/3.webp", alt: "Photo 3", description: "Mar de flores" },
+        { src: "../风景照片/4.jpg", alt: "Photo 4", description: "Caverna e céu estrelado" },
+        { src: "../风景照片/5.jpg", alt: "Photo 5", description: "Campo " },
+        { src: "../风景照片/6.jpg", alt: "Photo 6", description: "Mar de nuvens" },
+        { src: "../风景照片/7.jpg", alt: "Photo 7", description: "Ponte" },
+        { src: "../风景照片/8.jpg", alt: "Photo 8", description: "casa" },
+        { src: "../风景照片/9.jpg", alt: "Photo 9", description: "Aurora" },
+        { src: "../风景照片/11.jpg", alt: "Photo 11", description: "Luz das estrelas na neve" },
+        { src: "../风景照片/12.jpg", alt: "Photo 12", description: "Lua minguante" },
+        { src: "../风景照片/14.jpg", alt: "Photo 14", description: "Lua minguante" },
+        { src: "../风景照片/15.jpg", alt: "Photo 15", description: "Lua minguante" },
+        { src: "../风景照片/16.jpg", alt: "Photo 16", description: "Lua minguante" },
+        { src: "../风景照片/17.jpg", alt: "Photo 17", description: "Lua minguante" },
     ];
 
      // 动态加载照片和描述信息
