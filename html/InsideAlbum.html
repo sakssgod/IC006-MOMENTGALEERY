@@ -57,7 +57,7 @@
 
             const albumName = document.querySelector('.title').textContent.trim();
 
-            // 确认删除的照片名称
+            // Confirm delete message
             const photoNames = Array.from(selectedPhotos).map(checkbox => {
                 return checkbox.closest('.album-item').querySelector('.Photo-name').textContent;
             });
@@ -67,43 +67,52 @@
                 : `Are you sure you want to delete these photos: ${photoNames.join(', ')}?`;
 
             if (confirm(confirmMessage)) {
-                // 从 localStorage 中获取当前相册的所有照片
+                // Get current album photos from localStorage
                 const albumPhotos = JSON.parse(localStorage.getItem(albumName)) || [];
 
-                // 更新 localStorage，只保留未被选中的照片
-                const updatedPhotos = albumPhotos.filter(photo => {
-                    // 如果照片的名称不在要删除的名称列表中，则保留
-                    return !photoNames.includes(photo.name);
-                });
-                localStorage.setItem(albumName, JSON.stringify(updatedPhotos));
+                // Move selected photos to trash
+                const trash = JSON.parse(localStorage.getItem('trashPhoto')) || [];
 
-                // 删除 DOM 中选中的照片
                 selectedPhotos.forEach(checkbox => {
+                    const photoName = checkbox.closest('.album-item').querySelector('.Photo-name').textContent;
+                    const photoId = checkbox.closest('.album-item').getAttribute('data-photo-id');
+                    
+                    // Save deleted photo to trash with album name
+                    trash.push({
+                        id: photoId,
+                        name: photoName,
+                        albumName: albumName
+                    });
+
+                    // Remove photo from album
+                    const updatedPhotos = albumPhotos.filter(photo => photo.name !== photoName);
+                    localStorage.setItem(albumName, JSON.stringify(updatedPhotos));
+
+                    // Remove photo from DOM
                     const photoItem = checkbox.closest('.album-item');
                     photoItem.remove();
                 });
 
-                // 更新删除按钮的状态
+                // Update trash in localStorage
+                localStorage.setItem('trashPhoto', JSON.stringify(trash));
+
+                // Update delete button state
                 updateDeleteBtnState();
             }
         });
 
-
-        // Save photo to localStorage
         function savePhotoToLocalStorage(albumName, photo) {
             const photos = JSON.parse(localStorage.getItem(albumName)) || [];
             photos.push(photo);
             localStorage.setItem(albumName, JSON.stringify(photos));
         }
 
-        // Load photos from localStorage
         function loadPhotos(albumName) {
             const photos = JSON.parse(localStorage.getItem(albumName)) || [];
             photos.forEach(photo => createPhotoElement(photo.id, photo.name));
-            photoCounter = photos.length; // Update photo counter to avoid duplicate IDs
+            photoCounter = photos.length; 
         }
 
-        // Create and append photo element
         function createPhotoElement(photoId, photoName) {
             const newPhoto = document.createElement('div');
             newPhoto.classList.add('album-item');
@@ -121,18 +130,15 @@
 
         deleteBtn.style.visibility = 'hidden'; 
 
-        // Update delete button visibility
         function updateDeleteBtnState() {
             const anyChecked = Array.from(document.querySelectorAll('.deleteCheckbox')).some(cb => cb.checked);
             deleteBtn.style.visibility = anyChecked ? 'visible' : 'hidden';
         }
 
-        // Bind checkbox event
         function bindCheckboxEvent(checkbox) {
             checkbox.addEventListener('change', updateDeleteBtnState);
         }
 
-        // Bind photo click event to open photo details
         function bindPhotoClickEvent(photo) {
             photo.addEventListener('click', (event) => {
                 if (event.target.classList.contains('deleteCheckbox')) return;
