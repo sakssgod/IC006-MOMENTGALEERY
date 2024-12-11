@@ -1,5 +1,4 @@
- /* 自定义对话框样式 */
- .dialog-overlay {
+.dialog-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,8 +8,8 @@
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* 确保遮罩层在最上方 */
-    pointer-events: auto; /* 允许遮罩层捕获事件 */
+    z-index: 1000;
+    pointer-events: auto; 
 }
 
 .dialog-box {
@@ -47,7 +46,55 @@
     color: white;
 }
 
-/* 其它样式 */
+.delete-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.delete-dialog-overlay .dialog-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.delete-dialog-overlay .dialog-box p {
+    margin: 10px 0 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.delete-dialog-overlay .btn-confirm-delete {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.delete-dialog-overlay .btn-cancel-delete {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
 .topnav {
     display: flex;
     justify-content: space-between;
