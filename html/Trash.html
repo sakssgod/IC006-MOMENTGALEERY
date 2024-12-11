@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash</title>
+    <link rel="stylesheet" href="../style/TrashPage.css">
+    <link rel="stylesheet" href="../IconFiles/icon素材/iconfont.css">
+</head>
+<body>
+    <div class="topnav">
+        <a class="restoreBtn">Restore</a>
+        <span class="title">Trash</span>
+        <a class="deleteBtn">Delete Permanently</a>
+    </div>
+
+    <div class="album-container">
+        <!-- Trash items will be dynamically added here -->
+    </div>
+
+    <div class="dialog-overlay" style="display: none;">
+        <div class="dialog-box">
+            <h3 class="dialog-message">Are you sure?</h3>
+            <div class="album-list"></div>
+            <br>
+            <button class="btn-confirm">Confirm</button>
+            <button class="btn-cancel">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        const albumContainer = document.querySelector('.album-container');
+        const restoreBtn = document.querySelector('.restoreBtn');
+        const deleteBtn = document.querySelector('.deleteBtn');
+        const dialogOverlay = document.querySelector('.dialog-overlay');
+        const dialogMessage = document.querySelector('.dialog-message');
+        const albumList = document.querySelector('.album-list');
+        const btnConfirm = document.querySelector('.btn-confirm');
+        const btnCancel = document.querySelector('.btn-cancel');
+
+        restoreBtn.style.visibility = 'hidden';
+        deleteBtn.style.visibility = 'hidden';
+
+        let actionType = null; 
+        let selectedAlbums = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const trash = JSON.parse(localStorage.getItem('trash')) || [];
+
+            trash.forEach(album => {
+                createTrashAlbumElement(album.id, album.name, album.photos.length);
+            });
+            const trashPhoto = JSON.parse(localStorage.getItem('trashPhoto')) || [];
+            trashPhoto.forEach(photo => {
+                createTrashPhotoElement(photo.id, photo.name, photo.albumName);
+            });
+        });
+
+        function createTrashAlbumElement(albumId, albumName, photoCount) {
+            const trashItem = document.createElement('div');
+            trashItem.classList.add('album-item');
+            trashItem.setAttribute('data-album-id', albumId);
+            trashItem.setAttribute('data-album-name', albumName);
+            trashItem.innerHTML = `
+                <input type="checkbox" class="trashCheckbox">
+                <div class="icon album">&#xe600;</div>
+                <div class="album-name">${albumName}</div>
+                <div class="photo-count">${photoCount} photos</div>
+            `;
+            albumContainer.appendChild(trashItem);
+
+            const trashCheckbox = trashItem.querySelector('.trashCheckbox');
+            bindCheckboxEvent(trashCheckbox);
+        }
+
+        function createTrashPhotoElement(photoId, photoName,albumName) {
+            const trashItem = document.createElement('div');
+            trashItem.classList.add('album-item');
+            trashItem.setAttribute('data-album-id', photoId);
+            trashItem.setAttribute('data-album-name', photoName);
+            trashItem.innerHTML = `
+                <input type="checkbox" class="trashCheckbox">
+                <div class="icon album">&#xe618;</div>
+                <div class="album-name">${photoName}</div>
+            `;
+            albumContainer.appendChild(trashItem);
+
+            const trashCheckbox = trashItem.querySelector('.trashCheckbox');
+            bindCheckboxEvent(trashCheckbox);
+        }
+
+        function bindCheckboxEvent(checkbox) {
+            checkbox.addEventListener('change', () => {
+                const anyChecked = Array.from(document.querySelectorAll('.trashCheckbox')).some(cb => cb.checked);
+                restoreBtn.style.visibility = anyChecked ? 'visible' : 'hidden';
+                deleteBtn.style.visibility = anyChecked ? 'visible' : 'hidden';
+            });
+        }
+
+        restoreBtn.addEventListener('click', () => {
+            // 获取选中的相册
+            selectedAlbums = getSelectedAlbums();
+            if (selectedAlbums.length === 0) return;
+
+            // 显示确认对话框
+            actionType = 'restore';
+            updateDialogMessage(`Are you sure you want to restore the `);
+            dialogOverlay.style.display = 'flex';
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            // 获取选中的相册
+            selectedAlbums = getSelectedAlbums();
+            if (selectedAlbums.length === 0) return;
+
+            // 显示确认对话框
+            actionType = 'delete';
+            updateDialogMessage(`Are you sure you want to permanently delete the `);
+            dialogOverlay.style.display = 'flex';
+        });
+
+        btnConfirm.addEventListener('click', () => {
+            dialogOverlay.style.display = 'none';
+
+            if (actionType === 'restore') {
+                restoreAlbums();
+            } else if (actionType === 'delete') {
+                deleteAlbums();
+            }
+        });
+
+        btnCancel.addEventListener('click', () => {
+            dialogOverlay.style.display = 'none';
+        });
+
+        function getSelectedAlbums() {
+            return Array.from(document.querySelectorAll('.trashCheckbox:checked')).map(checkbox => {
+                const trashItem = checkbox.closest('.album-item');
+                return {
+                    id: Number(trashItem.getAttribute('data-album-id')),
+                    name: trashItem.getAttribute('data-album-name')
+                };
+            });
+        }
+
+        function updateDialogMessage(message) {
+            dialogMessage.textContent = message;
+
+            // 更新相册列表
+            albumList.innerHTML = '';
+            selectedAlbums.forEach(album => {
+                const albumItem = document.createElement('div');
+                albumItem.textContent = album.name;
+                albumList.appendChild(albumItem);
+            });
+        }
+
+        function restoreAlbums() {
+            let albums = JSON.parse(localStorage.getItem('albumNames')) || [];
+            let trash = JSON.parse(localStorage.getItem('trash')) || [];
+
+            selectedAlbums.forEach(album => {
+                const albumToRestore = trash.find(t => t.id === album.id);
+                if (albumToRestore) {
+                    albums.push({ id: albumToRestore.id, name: albumToRestore.name });
+                    localStorage.setItem(albumToRestore.name, JSON.stringify(albumToRestore.photos));
+                }
+
+                // 从 trash 数据中移除
+                trash = trash.filter(t => t.id !== album.id);
+
+                // 从 DOM 中移除
+                document.querySelector(`.album-item[data-album-id="${album.id}"]`).remove();
+            });
+
+            // 更新 localStorage
+            localStorage.setItem('albumNames', JSON.stringify(albums));
+            localStorage.setItem('trash', JSON.stringify(trash));
+
+            // 更新按钮状态
+            restoreBtn.style.visibility = 'hidden';
+            deleteBtn.style.visibility = 'hidden';
+        }
+
+        function deleteAlbums() {
+            let trash = JSON.parse(localStorage.getItem('trash')) || [];
+
+            selectedAlbums.forEach(album => {
+                // 从 trash 数据中永久删除
+                trash = trash.filter(t => t.id !== album.id);
+
+                // 从 DOM 中移除
+                document.querySelector(`.album-item[data-album-id="${album.id}"]`).remove();
+            });
+
+            // 更新 localStorage
+            localStorage.setItem('trash', JSON.stringify(trash));
+
+            // 更新按钮状态
+            restoreBtn.style.visibility = 'hidden';
+            deleteBtn.style.visibility = 'hidden';
+        }
+
+        function restorePhoto() {
+            let photo = JSON.parse(localStorage.getItem('albumNames')) || [];
+            let trashPhoto = JSON.parse(localStorage.getItem('trashPhoto')) || [];
+
+            selectedAlbums.forEach(photo => {
+                const photoToRestore = trashPhoto.find(t => t.id === photo.id);
+                if (photoToRestore) {
+                    albums.push({ id: albumToRestore.id, name: albumToRestore.name });
+                    localStorage.setItem(albumToRestore.name, JSON.stringify(albumToRestore.photos));
+                }
+
+                // 从 trash 数据中移除
+                trash = trash.filter(t => t.id !== album.id);
+
+                // 从 DOM 中移除
+                document.querySelector(`.album-item[data-album-id="${album.id}"]`).remove();
+            });
+
+            // 更新 localStorage
+            localStorage.setItem('albumNames', JSON.stringify(albums));
+            localStorage.setItem('trashPhoto', JSON.stringify(trash));
+
+            // 更新按钮状态
+            restoreBtn.style.visibility = 'hidden';
+            deleteBtn.style.visibility = 'hidden';
+        }
+
+        function deletePhotos() {
+            let trashPhoto = JSON.parse(localStorage.getItem('trashPhoto')) || [];
+
+            selectedAlbums.forEach(photo => {
+                // 从 trashPhoto 数据中永久删除
+                trashPhoto = trashPhoto.filter(t => t.id !== photo.id);
+
+                // 从 DOM 中移除
+                document.querySelector(`.album-item[data-album-id="${photo.id}"]`).remove();
+            });
+
+            // 更新 localStorage
+            localStorage.setItem('trash', JSON.stringify(trash));
+
+            // 更新按钮状态
+            restoreBtn.style.visibility = 'hidden';
+            deleteBtn.style.visibility = 'hidden';
+        }
+    </script>
+</body>
+</html>
