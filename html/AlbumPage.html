@@ -20,8 +20,7 @@
             <div class="album-name">Create New Album</div>
         </div>
     </div>
-
-    <!-- 自定义对话框 -->
+    
     <div class="dialog-overlay">
         <div class="dialog-box">
             <h3>Enter Album Name</h3>
@@ -29,6 +28,16 @@
             <br />
             <button class="btn-confirm">Confirm</button>
             <button class="btn-cancel">Cancel</button>
+        </div>
+    </div>
+
+    <div class="delete-dialog-overlay" style="display: none;">
+        <div class="dialog-box">
+            <h3>Are you sure you want to delete the following album(s)?</h3>
+            <div class="album-list"></div>
+            <br />
+            <button class="btn-delete-confirm">Confirm</button>
+            <button class="btn-delete-cancel">Cancel</button>
         </div>
     </div>
 
@@ -41,15 +50,18 @@
         const albumNameInput = document.querySelector('#albumNameInput');
         const btnConfirm = document.querySelector('.btn-confirm');
         const btnCancel = document.querySelector('.btn-cancel');
-        
+        const deleteDialogOverlay = document.querySelector('.delete-dialog-overlay');
+        const deleteMessage = document.querySelector('.album-list');
+        const btnConfirmDelete = document.querySelector('.btn-delete-confirm');
+        const btnCancelDelete = document.querySelector('.btn-delete-cancel');
+
         deleteBtn.style.visibility = 'hidden';
         BackBtn.style.visibility = 'hidden';
 
-        let albumCounter = JSON.parse(localStorage.getItem('albums'))?.length || 0;
+        let albumCounter = JSON.parse(localStorage.getItem('albumNames'))?.length || 0;
 
         document.addEventListener('DOMContentLoaded', () => {
-            const albums = JSON.parse(localStorage.getItem('albums')) || [];
-            
+            const albums = JSON.parse(localStorage.getItem('albumNames')) || [];
             albums.forEach(album => {
                 createAlbumElement(album.id, album.name);
             });
@@ -68,18 +80,18 @@
                 return;
             }
 
-            const existingAlbums = JSON.parse(localStorage.getItem('albums')) || [];
+            const existingAlbums = JSON.parse(localStorage.getItem('albumNames')) || [];
             if (existingAlbums.some(album => album.name === albumName)) {
                 alert("An album with this name already exists.");
                 return;
             }
 
             albumCounter++;
-            const newAlbum = { id: albumCounter, name: albumName };
+            const newAlbum = { id: albumCounter, name: albumName};
             createAlbumElement(newAlbum.id, newAlbum.name);
 
             existingAlbums.push(newAlbum);
-            localStorage.setItem('albums', JSON.stringify(existingAlbums));
+            localStorage.setItem('albumNames', JSON.stringify(existingAlbums));
 
             dialogOverlay.style.display = 'none';
         });
@@ -119,9 +131,26 @@
             const selectedAlbums = document.querySelectorAll('.deleteCheckbox:checked');
             if (selectedAlbums.length === 0) return;
 
-            let albums = JSON.parse(localStorage.getItem('albums')) || [];
+            const albumNames = Array.from(selectedAlbums).map(checkbox => {
+                const albumItem = checkbox.closest('.album-item');
+                return albumItem.querySelector('.album-name').textContent;
+            });
 
-            // 获取选中相册的 ID 和名称
+            deleteMessage.innerHTML = ''; 
+            albumNames.forEach(name => {
+                const div = document.createElement('div');
+                div.textContent = name;
+                deleteMessage.appendChild(div);
+            });
+            
+            deleteDialogOverlay.style.display = 'flex';
+        });
+
+        btnConfirmDelete.addEventListener('click', () => {
+            const selectedAlbums = document.querySelectorAll('.deleteCheckbox:checked');
+            let albums = JSON.parse(localStorage.getItem('albumNames')) || [];
+            let trash = JSON.parse(localStorage.getItem('trash')) || [];
+
             const albumsToDelete = Array.from(selectedAlbums).map(checkbox => {
                 const albumItem = checkbox.closest('.album-item');
                 const albumId = Number(albumItem.getAttribute('data-album-id'));
@@ -129,35 +158,29 @@
                 return album ? { id: albumId, name: album.name } : null;
             }).filter(Boolean);
 
-            // 确认删除提示
-            const albumNames = albumsToDelete.map(album => album.name);
-            const confirmMessage = albumsToDelete.length === 1
-                ? `Are you sure you want to delete the album "${albumNames[0]}"?`
-                : `Are you sure you want to delete these albums and their photos: ${albumNames.join(', ')}?`;
-
-            if (!confirm(confirmMessage)) return;
-
-            // 删除选中相册和相关照片数据
             albumsToDelete.forEach(album => {
-                // 从相册列表中移除
-                albums = albums.filter(a => a.id !== album.id);
-
-                // 删除与相册名称相关的照片数据
+                const photos = JSON.parse(localStorage.getItem(album.name)) || [];
+                trash.push({ id: album.id, name: album.name, photos });
                 localStorage.removeItem(album.name);
             });
 
-            // 更新 localStorage 中的相册数据
-            localStorage.setItem('albums', JSON.stringify(albums));
+            localStorage.setItem('trash', JSON.stringify(trash));
+            albums = albums.filter(a => !albumsToDelete.some(toDelete => toDelete.id === a.id));
+            localStorage.setItem('albumNames', JSON.stringify(albums));
 
-            // 从 DOM 中移除选中相册
             selectedAlbums.forEach(checkbox => {
                 const albumItem = checkbox.closest('.album-item');
                 albumItem.remove();
             });
 
-            // 更新删除按钮状态
+            deleteDialogOverlay.style.display = 'none';
             deleteBtn.style.visibility = 'hidden';
         });
+
+        btnCancelDelete.addEventListener('click', () => {
+            deleteDialogOverlay.style.display = 'none';
+        });
+
 
     </script>
 </body>
