@@ -116,8 +116,9 @@ overlay.addEventListener('click', closeFileExplorer);
 function openIframe(url) {
     const iframeContainer = document.getElementById('iframeContainer');
     const criteriosIframe = document.getElementById('criteriosIframe');
+    criteriosIframe.src = url; // 设置新的链接
     if (iframeContainer && criteriosIframe) {
-        criteriosIframe.src = url; // 设置 iframe 的链接
+
         iframeContainer.style.display = 'block'; // 显示 iframe 容器
     }
 }
@@ -138,8 +139,8 @@ function resizeIframe() {
         const iframeContent = iframe.contentWindow.document.body;
         
         // 获取内部内容的高度和宽度
-        const iframeHeight = iframeContent.scrollHeight - 5;
-        const iframeWidth = iframeContent.scrollWidth + 24;
+        const iframeHeight = iframeContent.scrollHeight || 570; 
+        const iframeWidth = iframeContent.scrollWidth || 870;
         // 调整 iframe 的高度和宽度
         iframe.style.height = iframeHeight + 'px';
         iframe.style.width = iframeWidth + 'px';
@@ -148,11 +149,6 @@ function resizeIframe() {
 
 
 
-
-
-
-// 调用函数
-resizeIframe();
 
 
 // 获取相关元素
