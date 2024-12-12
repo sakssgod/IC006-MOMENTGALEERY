@@ -191,11 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
         { src: "../风景照片/8.jpg", alt: "Photo 8", description: "casa" },
         { src: "../风景照片/9.jpg", alt: "Photo 9", description: "Aurora" },
         { src: "../风景照片/11.jpg", alt: "Photo 11", description: "Luz das estrelas na neve" },
-        { src: "../风景照片/12.jpg", alt: "Photo 12", description: "Lua minguante" },
-        { src: "../风景照片/14.jpg", alt: "Photo 14", description: "Lua minguante" },
-        { src: "../风景照片/15.jpg", alt: "Photo 15", description: "Lua minguante" },
-        { src: "../风景照片/16.jpg", alt: "Photo 16", description: "Lua minguante" },
-        { src: "../风景照片/17.jpg", alt: "Photo 17", description: "Lua minguante" },
+        { src: "../风景照片/12.jpg", alt: "Photo 12", description: "Lua minguante." },
+        { src: "../风景照片/14.jpg", alt: "Photo 14", description: "Lago e pôr do sol" },
+        { src: "../风景照片/15.jpg", alt: "Photo 15", description: "Água do lago" },
+        { src: "../风景照片/16.jpg", alt: "Photo 16", description: "Riacho na floresta" },
+        { src: "../风景照片/17.jpg", alt: "Photo 17", description: "Auréola" },
     ];
 
      // 动态加载照片和描述信息
@@ -265,29 +265,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 示例文件数据
     const files = [
-        { src: "../表情包 emoji/images (1).jpg", name: "Desktop" },
-        { src: "../表情包 emoji/images (2).jpg", name: "Documents" },
-        { src: "../表情包 emoji/images.jpg", name: "Downloads" },
-        { src: "../表情包 emoji/下载 (1).jpg", name: "Music" },
-        { src: "../表情包 emoji/下载 (2).jpg", name: "Pictures" },
-        { src: "../表情包 emoji/下载 (3).jpg", name: ".bashrc" },
-        { src: "../表情包 emoji/下载 (4).jpg", name: ".profile" },
-        { src: "../表情包 emoji/images (1).jpg", name: "Desktop" },
-        { src: "../表情包 emoji/images (2).jpg", name: "Documents" },
-        { src: "../表情包 emoji/images.jpg", name: "Downloads" },
-        { src: "../表情包 emoji/下载 (1).jpg", name: "Music" },
-        { src: "../表情包 emoji/下载 (2).jpg", name: "Pictures" },
-        { src: "../表情包 emoji/下载 (3).jpg", name: ".bashrc" },
-        { src: "../表情包 emoji/下载 (4).jpg", name: ".profile" },
-        { src: "../表情包 emoji/images (1).jpg", name: "Desktop" },
-        { src: "../表情包 emoji/images (2).jpg", name: "Documents" },
-        { src: "../表情包 emoji/images.jpg", name: "Downloads" },
-        { src: "../表情包 emoji/下载 (1).jpg", name: "Music" },
-        { src: "../表情包 emoji/下载 (2).jpg", name: "Pictures" },
-        { src: "../表情包 emoji/下载 (3).jpg", name: ".bashrc" },
-        { src: "../表情包 emoji/下载 (4).jpg", name: ".profile" },
-        
-        { src: "../表情包 emoji/下载 (5).jpg", name: "example.txt" }
+        { src: "../婚纱照片/casamento1.jpg", name: "casamento 1" },
+        { src: "../婚纱照片/casamento2.jpg", name: "casamento 2" },
+        { src: "../婚纱照片/casamento3.webp", name: "casamento 3" },
+        { src: "../婚纱照片/casamento4.jpeg", name: "casamento 4" },
+        { src: "../婚纱照片/casamento5.jpeg", name: "casamento 5" },
+        { src: "../婚纱照片/casamento6.jpeg", name: "casamento 6" },
+        { src: "../婚纱照片/casamento7.webp", name: "casamento 7" },
+        { src: "../婚纱照片/casamento8.jpeg", name: "casamento 8" },
+        { src: "../婚纱照片/casamento9.jpg", name: "casamento 9" },
+        { src: "../婚纱照片/casamento10.jpg", name: "casamento 10" },
+        { src: "../婚纱照片/casamento11.jpg", name: "casamento 11" },
+        { src: "../婚纱照片/casamento12.jpeg", name: "casamento 12" },
+        { src: "../婚纱照片/casamento13.jpeg", name: "casamento 13" },
+        { src: "../婚纱照片/casamento14.jpeg", name: "casamento 14" },
+        { src: "../婚纱照片/casamento15.jpeg", name: "casamento 15" },
+        { src: "../婚纱照片/casamento16.jpeg", name: "casamento 16" },
+        { src: "../婚纱照片/casamento17.jpeg", name: "casamento 17" },
+        { src: "../婚纱照片/casamento18.jpeg", name: "casamento 18" },
+        { src: "../婚纱照片/casamento19.jpeg", name: "casamento 19" },
+        { src: "../婚纱照片/casamento20.jpg", name: "casamento 20" },
+        { src: "../婚纱照片/casamento21.jpg", name: "casamento 21" },
+        { src: "../婚纱照片/casamento.jpg", name: "casamento 22" },
+       
     ];
 
     // 动态生成图片和复选框
