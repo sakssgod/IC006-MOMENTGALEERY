@@ -31,8 +31,8 @@ body {
 main{
     margin-top: 30px;
     margin-left: 100px;
-    width: 80%;
-
+    width: 100%;
+    border: 1px solid red;
 
 }
 
@@ -47,7 +47,6 @@ main{
     position: relative;
     cursor: pointer;
     margin-left: 20px;
-    margin-bottom: 20px;
 
     /* 使用 Flexbox 居中内容 */
     display: flex;
@@ -359,12 +358,6 @@ main{
 }
   
 
-
-
-}
-
-
-
 .thumbnail {
     width: 100%;
     height: 100px;
@@ -561,7 +554,7 @@ main{
 /* main下面照片的部分 */
 .photo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 10px;
     padding: 20px;
     
@@ -583,8 +576,8 @@ main{
 }
 
 .photo img {
-    width: 150px; /* 限制图片最大宽度 */
-    height: 130px; /* 限制图片最大高度 */
+    width: 240px; /* 限制图片最大宽度 */
+    height: 220px; /* 限制图片最大高度 */
     transition: transform 0.3s ease;
     border-radius: 8px; /* 保持与容器一致的圆角 */
 

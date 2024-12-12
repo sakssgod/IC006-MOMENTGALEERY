@@ -17,13 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   
       // 从 localStorage 获取现有的相册名称数组
-      let albumList = JSON.parse(localStorage.getItem('albumNames')) || [];
+      let albumList = JSON.parse(localStorage.getItem('albumNamesFromHomepage')) || [];
   
       // 将新的相册名称添加到数组
       albumList.push(albumName);
   
       // 将更新后的数组保存回 localStorage
-      localStorage.setItem('albumNames', JSON.stringify(albumList));
+      localStorage.setItem('albumNamesFromHomepage', JSON.stringify(albumList));
   
       // 隐藏初始模态框并显示加载模态框
       initialModal.style.display = 'none';
