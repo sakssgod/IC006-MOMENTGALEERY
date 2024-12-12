@@ -680,5 +680,14 @@ main{
 }
 
 
+.updateANDpicture h3{
+    color: var(--primary-color);
+    font-size: 30px;
+}
 
 
+
+.photos h3{
+    color: var(--primary-color);
+    font-size: 30px;
+}
