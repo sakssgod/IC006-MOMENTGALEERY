@@ -195,11 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
         { src: "../风景照片/8.jpg", alt: "Photo 8", description: "casa" },
         { src: "../风景照片/9.jpg", alt: "Photo 9", description: "Aurora" },
         { src: "../风景照片/11.jpg", alt: "Photo 11", description: "Luz das estrelas na neve" },
-        { src: "../风景照片/12.jpg", alt: "Photo 12", description: "Lua minguante" },
-        { src: "../风景照片/14.jpg", alt: "Photo 14", description: "Lua minguante" },
-        { src: "../风景照片/15.jpg", alt: "Photo 15", description: "Lua minguante" },
-        { src: "../风景照片/16.jpg", alt: "Photo 16", description: "Lua minguante" },
-        { src: "../风景照片/17.jpg", alt: "Photo 17", description: "Lua minguante" },
+        { src: "../风景照片/12.jpg", alt: "Photo 12", description: "Lua minguante." },
+        { src: "../风景照片/14.jpg", alt: "Photo 14", description: "Lago e pôr do sol" },
+        { src: "../风景照片/15.jpg", alt: "Photo 15", description: "Água do lago" },
+        { src: "../风景照片/16.jpg", alt: "Photo 16", description: "Riacho na floresta" },
+        { src: "../风景照片/17.jpg", alt: "Photo 17", description: "Auréola" },
     ];
 
      // 动态加载照片和描述信息
