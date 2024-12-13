@@ -232,8 +232,8 @@
             <div class="filter-section">
                 <div class="filter-header">Date</div>
                 <ul class="filter-options">
-                    <li><input type="radio" name="month" value="wa"> January</li>
-                    <li><input type="radio" name="month" value="ed"> February</li>
+                    <li><input type="radio" name="month" value="m6"> January</li>
+                    <li><input type="radio" name="month" > February</li>
                     <li><input type="radio" name="month"> March</li>
                     <li><input type="radio" name="month"> April</li>
                     <li><input type="radio" name="month"> May</li>
@@ -252,12 +252,12 @@
             <div class="filter-section">
                 <div class="filter-header">Local</div>
                 <ul class="filter-options">
-                    <li><input type="checkbox" value="n2"> Albufeira</li>
-                    <li><input type="checkbox" value="n3"> Almada</li>
-                    <li><input type="checkbox" value="wa"> Amadora</li>
-                    <li><input type="checkbox"value="ed"> Amarante</li>
+                    <li><input type="checkbox" value="m7"> Albufeira</li>
+                    <li><input type="checkbox"> Almada</li>
+                    <li><input type="checkbox"> Amadora</li>
+                    <li><input type="checkbox"> Amarante</li>
                     <li><input type="checkbox"> Angra do Heroísmo</li>
-                    <li class="hidden-option"><input type="checkbox" value="Aveiro"> Aveiro</li>
+                    <li class="hidden-option"><input type="checkbox"> Aveiro</li>
                     <li class="hidden-option"><input type="checkbox"> Beja</li>
                     <li class="hidden-option"><input type="checkbox"> Braga</li>
                     <li class="hidden-option"><input type="checkbox"> Bragança</li>
@@ -309,8 +309,8 @@
             <div class="filter-section">
                 <div class="filter-header">Person</div>
                 <ul class="filter-options">
-                    <li><input type="checkbox"> Bride</li>
-                    <li><input type="checkbox"> Groom</li>
+                    <li><input type="checkbox" value="m21"> Bride</li>
+                    <li><input type="checkbox"value="m4"> Groom</li>
                     <li><input type="checkbox"> Bridesmaid</li>
                     <li><input type="checkbox"> Best Man</li>
                     <li><input type="checkbox"> Flower Girl</li>
@@ -334,7 +334,7 @@
             <div class="filter-section">
                 <div class="filter-header">Emotion</div>
                 <ul class="filter-options">
-                    <li><input type="checkbox"> Happy</li>
+                    <li><input type="checkbox" value="m15"> Happy</li>
                     <li><input type="checkbox"> Sad</li>
                     <li><input type="checkbox"> Angry</li>
                     <li><input type="checkbox"> Fearful</li>
@@ -378,7 +378,7 @@
                 <div class="filter-header">Filter</div>
                 <ul class="filter-options">
                     <li><input type="checkbox"> Black & White</li>
-                    <li><input type="checkbox"> Bright</li>
+                    <li><input type="checkbox" value="m13"> Bright</li>
                     <li><input type="checkbox"> Dreamy</li>
                     <li><input type="checkbox"> High Contrast</li>
                     <li><input type="checkbox"> Soft Glow</li>
@@ -576,7 +576,7 @@
         const productItem = document.createElement("div");
         productItem.classList.add("product-item");
 
-        const customNames = ['wa', 'wa', 'wa', 'we', 'we', 'ed', 'ed', 'wa'];
+        const customNames = ['m1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10', 'm12', 'm13', 'm14', 'm15', 'm16', 'm17', 'm18', 'm19', 'm20', 'm21', 'm22'];
         // 使用自定义名称序列，如果index超出序列长度则循环使用
         const customValue = customNames[index % customNames.length];
         productItem.setAttribute("data-value", customValue);

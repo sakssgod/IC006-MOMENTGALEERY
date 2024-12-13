@@ -176,6 +176,7 @@ window.addEventListener('message', (event) => {
 
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const photoGrid = document.getElementById("photo-grid");
 

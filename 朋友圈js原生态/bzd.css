@@ -9,14 +9,25 @@ body, html {
     box-sizing: border-box;
 }
 
+/* 全局变量 */
+:root {
+    --body-color: #E4E9F7;
+    --shell-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+}
+
 .header-bar {
-    width: 100%;
+    width: auto;
     height: 50px;
     background-color: rgba(238, 233, 233, 1);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 15px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .header-bar .title {
@@ -61,6 +72,7 @@ body, html {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
+    display: block; 
 }
 
 .post-header {
@@ -166,4 +178,93 @@ body, html {
 
 .comment-user:hover {
     text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}
+
+
+/* Popup Window Styling */
+.popup-window {
+    width: 500px;
+    height: 300px;
+    background-color: #fff;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    margin: 20px auto;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 40%;
+    left: 35%;
+    z-index: 1000; /* 保证弹窗在 overlay 上面 */
+}
+
+.popup-window.active {
+    display: flex;
+}
+
+
+.popup-window textarea {
+    width: 100%;
+    height: 30%;
+    resize: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.popup-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.imgs-area{
+    display: flex;
+}
+.imgs-area img {
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.popup-controls button {
+    padding: 10px 20px;
+    background-color: rgba(38, 156, 224, 1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.popup-controls button:hover {
+    background-color: rgba(38, 156, 224, 0.8);
+}
+
+/* 半透明背景层样式 */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色 */
+    z-index: 999; /* 确保覆盖内容 */
+    display: none; /* 默认隐藏 */
+}
+
+/* 显示状态 */
+.overlay.active {
+    display: block;
+}
+
+
+
+/* 隐藏第一个帖子 */
+#post-list .post.hidden {
+    display: none;
 }

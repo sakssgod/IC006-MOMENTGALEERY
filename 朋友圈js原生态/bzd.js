@@ -1,10 +1,27 @@
 
 document.addEventListener("DOMContentLoaded", () => {
+    const updateLink = document.querySelector('.header-bar a[data-target="../html/ImportPhotosPage.html"]');
+    const popupWindow = document.querySelector('.popup-window');
+    const overlay = document.querySelector('.overlay');
+    const textarea = popupWindow.querySelector('textarea');
+    const publishButton = popupWindow.querySelector('.popup-controls button');
     const postList = document.getElementById('post-list');
-
     const data = {
         username: "Me",
         posts: [
+
+            {
+                name: "Banan_Cat",
+                userpic: "../Images/头像1.jpeg",
+                content: "This  is so BEAUTIFUL, My heart got cleaned :)",
+                picUrl: ["../风景照片/2.jpg"],
+                time: "Just now",
+                likes: [],
+                comments: [
+                    
+                ]
+            },
+            
             {
                 name: "OuJie Wu",
                 userpic: "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg",
@@ -38,7 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         postList.innerHTML = "";
         posts.forEach((post, index) => {
             const postDiv = document.createElement('div');
-            postDiv.className = 'post';
+            postDiv.className = `post ${index === 0 ? 'hidden' : ''}`; // 隐藏第一个帖子
+            postDiv.style.display = index === 0 ? 'none' : 'block'; // 初始状态
 
             // 用户信息
             const userDiv = document.createElement('div');
@@ -143,11 +161,47 @@ document.addEventListener("DOMContentLoaded", () => {
         // 评论功能
         if (target.classList.contains("comment-button")) {
             const index = target.dataset.index;
-            const comment = prompt("请输入评论：");
+            const comment = prompt("write down a comment：");
             if (comment) {
                 data.posts[index].comments.push({ pname: data.username, comment });
                 renderPosts(data.posts);
             }
         }
     });
+
+    updateLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        popupWindow.classList.add('active');
+        overlay.classList.add('active');
+    });
+
+    publishButton.addEventListener('click', () => {
+        const content = textarea.value.trim();
+        if (content) {
+            const post = data.posts[0]; // 更新第一个帖子
+            post.content = content;
+            post.time = new Date().toLocaleString();
+
+            const firstPost = postList.querySelector('.post.hidden');
+            if (firstPost) {
+                firstPost.classList.remove('hidden');
+                firstPost.style.display = 'block';
+            }
+
+            localStorage.setItem('posts', JSON.stringify(post));
+            textarea.value = ''; // 清空输入框
+            popupWindow.classList.remove('active');
+            overlay.classList.remove('active');
+            alert('post with success!');
+        } else {
+            alert('content empty！');
+        }
+    });
+
+    overlay.addEventListener('click', () => {
+        popupWindow.classList.remove('active');
+        overlay.classList.remove('active');
+    });
 });
+
+

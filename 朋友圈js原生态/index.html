@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>朋友圈</title>
     <link rel="stylesheet" href="bzd.css">
+    <link rel="stylesheet" href="../IconFiles/font_4742343_i01w1s70jxa/iconfont.css">
 </head>
 <body>
     <div id="app">
         <!-- 顶部导航 -->
         <div class="header-bar">
-            <span class="title">Social</span>
-            <i class="icon-shejiao-xiangji"></i>
+            <span class="title">Social </span>
+            <a href="#" data-target="../html/ImportPhotosPage.html"><i class="iconfont icon-shangchuan_huaban icon"></i><span class="text">Update</span></a>
         </div>
 
         <!-- 用户信息 -->
@@ -29,6 +30,21 @@
                 <!-- 动态内容列表由 JavaScript 渲染 -->
             </div>
         </div>
+
+
+        <!-- 新增窗口 -->
+        <div class="overlay"></div>
+        <div class="popup-window">
+            <textarea placeholder="What's on your mind? What about Write something..."></textarea>
+            <div class="imgs-area">
+                <img src="../风景照片/2.jpg" alt="示例图片">
+            </div>
+            <div class="popup-controls">
+                <button>发布</button>
+            </div>
+        </div>
+
+
     </div>
 
     <script src="bzd.js"></script>
