@@ -358,7 +358,7 @@
                     <li><input type="checkbox"> Mountain</li>
                     <li><input type="checkbox"> Wedding</li>
                     <li><input type="checkbox"> Carnival</li>
-                    <li><input type="checkbox"> Christmas</li>
+                    <li><input type="checkbox" value="m2"> Christmas</li>
                     <li><input type="checkbox"> Concert</li>
                     <li><input type="checkbox"> Football Match</li>
                     <li><input type="checkbox"> Room Party</li>
@@ -559,7 +559,7 @@
     document.addEventListener("DOMContentLoaded", () => {
     const productList = document.querySelector(".product-list");
     const itemsFound = document.querySelector("#itemsFound"); // 假设 HTML 中有一个显示项目数量的元素
-
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     // 从 localStorage 获取选中的文件数据
     const selectedFiles = JSON.parse(localStorage.getItem("selectedFiles")) || [];
 
@@ -567,6 +567,7 @@
     if (itemsFound) {
         itemsFound.textContent = `${selectedFiles.length} items found`;
     }
+    
 
     // 清空当前的产品列表
     productList.innerHTML = "";
@@ -692,6 +693,11 @@ document.querySelector('.bottom-button.criar').addEventListener('click', () => {
     // 通知父页面关闭iframe并显示modal-pack
     window.parent.postMessage({ action: 'openModalPack' }, '*');
 });
+
+
+
+
+
 
 </script>
 

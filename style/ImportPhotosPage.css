@@ -712,6 +712,18 @@ main{
     transition: background-color 0.3s ease;
 }
 
+.help-button a {
+    text-decoration: none; /* 移除下划线 */
+    font-size: 32px; /* 增大字体 */
+    color: white; /* 保持文字颜色一致 */
+    display: flex; /* 确保内容居中 */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
 .help-button:hover {
     background-color: #0056b3; 
 }
