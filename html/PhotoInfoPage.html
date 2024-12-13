@@ -23,84 +23,97 @@
 
 
 <div class="slideshow-container" id="main">
-    <div class="Slides fade" data-photo-name="Photo 1">
-        <img src="../Images/头像1.jpeg" alt="Image 1">
-    </div>
-    <div class="Slides fade" data-photo-name="Photo 2">
-        <img src="../Images/dragao.png" alt="Image 2">
-    </div>
-    <div class="Slides fade" data-photo-name="Photo 3">
-        <img src="../Images/espaço.png" alt="Image 3">
-    </div>
     <a class="prev" onclick="plusSlides(-1)">❮</a>
     <a class="next" onclick="plusSlides(1)">❯</a>
 </div>
 
 <script>
+    const albumContainer = document.querySelector('.slideshow-container');
+    document.addEventListener('DOMContentLoaded', () => {
+        loadPhotos('filtered-selectedFiles');
+    });
 
-let slideIndex = 1;
-showSlides(slideIndex);
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const photoName = params.get('photoName');
+        if (photoName) {
+            document.querySelector('.title').textContent = photoName;
+        }
+    });
 
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("Slides");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    slides[slideIndex-1].style.display = "block";
-
-    const photoName = slides[slideIndex-1].getAttribute('data-photo-name');
-    document.querySelector('.topnav .title').textContent = photoName;
-    document.querySelector('.sidebar .title').textContent = photoName; 
-}
-
-
-function openNav() {
-    document.getElementById("Sidebar").style.width = "250px";
-    document.getElementById("main").style.width = "84%";
-    document.getElementById("main").style.right = "16%";  
-}
-
-function closeNav() {
-    document.getElementById("Sidebar").style.width = "0";
-    document.getElementById("main").style.width = "100%";
-    document.getElementById("main").style.right = "0";
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const photoName = params.get('photoName');
-    if (photoName) {
-        document.querySelector('.title').textContent = photoName;
-    }
-});
- document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const photoName = params.get('photoName');
-            const albumName = params.get('albumName');
-
-            if (photoName) {
-                const slides = document.getElementsByClassName("Slides");
-                for (let i = 0; i < slides.length; i++) {
-                    if (slides[i].getAttribute('data-photo-name') === photoName) {
-                        slideIndex = i + 1;
-                        showSlides(slideIndex);
-                        break;
+    document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const photoName = params.get('photoName');
+                const albumName = params.get('albumName');
+                if (photoName) {
+                    const slides = document.getElementsByClassName("Slides");
+                    for (let i = 0; i < slides.length; i++) {
+                        if (slides[i].getAttribute('data-photo-name') === photoName) {
+                            slideIndex = i + 1;
+                            showSlides(slideIndex);
+                            break;
+                        }
                     }
                 }
-            }
 
-            const backButton = document.querySelector('.topnav a[href="InsideAlbum.html"]');
-            if (albumName) {
-                backButton.href = `InsideAlbum.html?albumName=${encodeURIComponent(albumName)}`;
-            }
-        });
+                const backButton = document.querySelector('.topnav a[href="InsideAlbum.html"]');
+                if (albumName) {
+                    backButton.href = `InsideAlbum.html?albumName=${encodeURIComponent(albumName)}`;
+                }
+    });
+
+    function loadPhotos(albumName) {
+            const photos = JSON.parse(localStorage.getItem(albumName)) || [];
+            photos.forEach(photo => createPhotoElement(photo.id, photo.name, photo.src));
+            photoCounter = photos.length; 
+    }
+
+    function createPhotoElement(photoId, photoName, photoSrc) {
+                const newPhoto = document.createElement('div');
+                newPhoto.classList.add('album-item');
+                newPhoto.setAttribute('data-photo-id', photoId);
+                newPhoto.innerHTML = `
+                    <div class="Slides fade" data-photo-name="${photoName}">
+                        <img src="${photoSrc}" alt="${photoName}">
+                    </div>
+                `;
+                albumContainer.appendChild(newPhoto);
+    }
+
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("Slides");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+
+        const photoName = slides[slideIndex-1].getAttribute('data-photo-name');
+        document.querySelector('.topnav .title').textContent = photoName;
+        document.querySelector('.sidebar .title').textContent = photoName; 
+    }
+
+
+    function openNav() {
+        document.getElementById("Sidebar").style.width = "250px";
+        document.getElementById("main").style.width = "84%";
+        document.getElementById("main").style.right = "16%";  
+    }
+
+    function closeNav() {
+        document.getElementById("Sidebar").style.width = "0";
+        document.getElementById("main").style.width = "100%";
+        document.getElementById("main").style.right = "0";
+    }
 </script>
 
 </body>

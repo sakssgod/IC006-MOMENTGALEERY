@@ -11,20 +11,56 @@
     <div class="topnav">
         <a href="AlbumPage.html">Back</a>
         <span class="title"></span>
-        <a class="deleteBtn">Delete</a>
+        <a class="SelectAllBtn">Select All</a>
     </div>
     
-   <div class="album-container">
+    <div class="album-container">
         <div class="album-item add-photo">
             <div class="icon plus">&#xe605;</div>
             <div class="Photo-name">Add New Photo</div>
         </div>
     </div>
+
+    <div class="dropdown-menu" id="dropdownMenu">
+        <div class="dropdown-item" onclick="changeTheme('pc')">
+            <i class="iconfont icon-pc"></i> From PC
+        </div>
+        <div class="dropdown-item" onclick="changeTheme('cloud')">
+            <i class="iconfont icon-cloud-upload"></i> From Cloud
+        </div>
+        <div class="dropdown-item" onclick="changeTheme('instagram')">
+            <i class="iconfont icon-instagram"></i> From Instagram
+        </div>
+        <div class="dropdown-item" onclick="changeTheme('facebook')">
+            <i class="iconfont icon-facebook1"></i> From Facebook
+        </div>
+    </div>
+    
+    <div class="delete-dialog-overlay">
+        <div class="dialog-box">
+            <h3 class="dialog-message">Are you sure you want to delete the</h3>
+            <div class="photo-list"></div>
+            <br />
+            <button class="btn-delete-confirm">YES</button>
+            <button class="btn-delete-cancel">NO</button>
+        </div>
+    </div>
+
+    <div class="bottomnav">
+        <span class="selected-count">Selected: 0</span>
+        <a class="deleteBtn" style="visibility: hidden;">Delete</a>
+    </div>
     
     <script>
+        const SelectAllBtn = document.querySelector('.SelectAllBtn');
         const albumContainer = document.querySelector('.album-container');
-        const deleteBtn = document.querySelector('.deleteBtn');
+        const deleteBtn = document.querySelector('.bottomnav .deleteBtn');
         const addPhotoBtn = document.querySelector('.add-photo');
+        const selectedCount = document.querySelector('.selected-count');
+        const bottomNav = document.querySelector('.bottomnav');
+        const deleteDialogOverlay = document.querySelector('.delete-dialog-overlay');
+        const btnDeleteConfirm = document.querySelector('.btn-delete-confirm');
+        const btnDeleteCancel = document.querySelector('.btn-delete-cancel');
         let photoCounter = 0;
 
         // Get album name from URL and set title
@@ -34,15 +70,14 @@
             document.querySelector('.title').textContent = albumName || 'Unnamed Album';
 
             // Load photos from localStorage
-            loadPhotos(albumName);
+            loadPhotos('filtered-selectedFiles');
         });
 
         // Add photo button click event
         addPhotoBtn.addEventListener('click', () => {
             photoCounter++;
             const photoName = `Photo${photoCounter}`;
-            const albumName = document.querySelector('.title').textContent.trim();
-
+            const albumName = 'filtered-selectedFiles';
             // Save photo to localStorage
             savePhotoToLocalStorage(albumName, { id: photoCounter, name: photoName });
 
@@ -50,55 +85,58 @@
             createPhotoElement(photoCounter, photoName);
         });
 
-        // Delete button click event
         deleteBtn.addEventListener('click', () => {
             const selectedPhotos = document.querySelectorAll('.deleteCheckbox:checked');
             if (selectedPhotos.length === 0) return;
 
-            const albumName = document.querySelector('.title').textContent.trim();
+            const allCheckboxes = document.querySelectorAll('.deleteCheckbox');
+            const isAllSelected = selectedPhotos.length === allCheckboxes.length; // Exclude "Create New Album"
+            const dialogMessage = document.querySelector('.dialog-message');
+            const photoList = document.querySelector('.photo-list');
+            photoList.innerHTML = ''; // Clear previous photo list
 
-            // Confirm delete message
-            const photoNames = Array.from(selectedPhotos).map(checkbox => {
-                return checkbox.closest('.album-item').querySelector('.Photo-name').textContent;
-            });
-
-            const confirmMessage = selectedPhotos.length === 1
-                ? `Are you sure you want to delete "${photoNames[0]}"?`
-                : `Are you sure you want to delete these photos: ${photoNames.join(', ')}?`;
-
-            if (confirm(confirmMessage)) {
-                // Get current album photos from localStorage
-                const albumPhotos = JSON.parse(localStorage.getItem(albumName)) || [];
-
-                // Move selected photos to trash
-                const trash = JSON.parse(localStorage.getItem('trashPhoto')) || [];
-
-                selectedPhotos.forEach(checkbox => {
-                    const photoName = checkbox.closest('.album-item').querySelector('.Photo-name').textContent;
-                    const photoId = checkbox.closest('.album-item').getAttribute('data-photo-id');
-                    
-                    // Save deleted photo to trash with album name
-                    trash.push({
-                        id: photoId,
-                        name: photoName,
-                        albumName: albumName
-                    });
-
-                    // Remove photo from album
-                    const updatedPhotos = albumPhotos.filter(photo => photo.name !== photoName);
-                    localStorage.setItem(albumName, JSON.stringify(updatedPhotos));
-
-                    // Remove photo from DOM
-                    const photoItem = checkbox.closest('.album-item');
-                    photoItem.remove();
+            if (isAllSelected && selectedPhotos.length > 1) {
+                dialogMessage.textContent = 'Are you sure you want to delete all photos?';
+            } else {
+                dialogMessage.textContent = 'Are you sure you want to delete the';
+                const photoName = Array.from(selectedPhotos).map(checkbox => {
+                    const albumItem = checkbox.closest('.album-item');
+                    return albumItem.querySelector('.Photo-name').textContent;
                 });
 
-                // Update trash in localStorage
-                localStorage.setItem('trashPhoto', JSON.stringify(trash));
-
-                // Update delete button state
-                updateDeleteBtnState();
+                photoName.forEach(name => {
+                    const div = document.createElement('div');
+                    div.textContent = name;
+                    photoList.appendChild(div);
+                });
             }
+
+            deleteDialogOverlay.style.display = 'flex';
+        });
+
+        SelectAllBtn.addEventListener('click', () => {
+            const allCheckboxes = document.querySelectorAll('.deleteCheckbox');
+            const isAllSelected = Array.from(allCheckboxes).every(checkbox => checkbox.checked);
+
+            allCheckboxes.forEach(checkbox => {
+                checkbox.checked = !isAllSelected;
+            });
+
+            const selectedCheckboxes = Array.from(allCheckboxes).filter(cb => cb.checked);
+            const selectedCountText = selectedCheckboxes.length;
+            selectedCount.textContent = `Selected: ${selectedCountText}`;
+
+            if (selectedCheckboxes.length > 0) {
+                bottomNav.style.visibility = 'visible';
+            } else {
+                bottomNav.style.visibility = 'hidden';
+            }
+
+            deleteBtn.style.visibility = selectedCheckboxes.length > 0 ? 'visible' : 'hidden';
+        });
+
+        btnDeleteCancel.addEventListener('click', () => {
+            deleteDialogOverlay.style.display = 'none';
         });
 
         function savePhotoToLocalStorage(albumName, photo) {
@@ -109,17 +147,18 @@
 
         function loadPhotos(albumName) {
             const photos = JSON.parse(localStorage.getItem(albumName)) || [];
-            photos.forEach(photo => createPhotoElement(photo.id, photo.name));
+            photos.forEach(photo => createPhotoElement(photo.id, photo.name, photo.src));
             photoCounter = photos.length; 
         }
 
-        function createPhotoElement(photoId, photoName) {
+        function createPhotoElement(photoId, photoName, photoSrc) {
             const newPhoto = document.createElement('div');
             newPhoto.classList.add('album-item');
             newPhoto.setAttribute('data-photo-id', photoId);
+            newPhoto.setAttribute('data-photo-src', photoSrc);
             newPhoto.innerHTML = `
                 <input type="checkbox" class="deleteCheckbox">
-                <div class="icon album">&#xe618;</div>
+                <img id="Image" src="${photoSrc}" style="width: 80px"></img>
                 <div class="Photo-name">${photoName}</div>
             `;
             albumContainer.appendChild(newPhoto);
@@ -128,15 +167,76 @@
             bindPhotoClickEvent(newPhoto);
         }
 
-        deleteBtn.style.visibility = 'hidden'; 
+        btnDeleteConfirm.addEventListener('click', () => {
+            const selectedPhotos = document.querySelectorAll('.deleteCheckbox:checked');
+            if (selectedPhotos.length === 0) return;
+
+            // 获取当前相册名称
+            const albumName = 'filtered-selectedFiles';
+
+            // 从 localStorage 获取相册中的照片
+            let albumPhotos = JSON.parse(localStorage.getItem(albumName)) || [];
+            let trashPhoto = JSON.parse(localStorage.getItem('trashPhoto')) || [];
+
+            selectedPhotos.forEach(checkbox => {
+                const photoName = checkbox.closest('.album-item').querySelector('.Photo-name').textContent;
+                const photoId = checkbox.closest('.album-item').getAttribute('data-photo-id');
+                const photoSrc = checkbox.closest('.album-item').getAttribute('data-photo-src');
+
+                // 将删除的照片添加到垃圾桶
+                trashPhoto.push({
+                    id: photoId,
+                    name: photoName,
+                    albumName: albumName,
+                    src: photoSrc
+                });
+
+                // 从相册中移除该照片（根据 photoId）
+                albumPhotos = albumPhotos.filter(photo => photo.id !== photoId); // 使用 id 删除
+
+                // 从 DOM 中移除照片
+                const photoItem = checkbox.closest('.album-item');
+                photoItem.remove();
+            });
+
+            // 更新 localStorage 中的相册数据
+            localStorage.setItem(albumName, JSON.stringify(albumPhotos));
+
+            // 更新垃圾桶中的照片
+            localStorage.setItem('trashPhoto', JSON.stringify(trashPhoto));
+
+            // 更新删除按钮的显示状态
+            updateDeleteBtnState();
+
+            // 关闭确认对话框
+            deleteDialogOverlay.style.display = 'none';
+        });
+
+
 
         function updateDeleteBtnState() {
             const anyChecked = Array.from(document.querySelectorAll('.deleteCheckbox')).some(cb => cb.checked);
             deleteBtn.style.visibility = anyChecked ? 'visible' : 'hidden';
+
+            // Update the selected count
+            const selectedCheckboxes = Array.from(document.querySelectorAll('.deleteCheckbox:checked'));
+            selectedCount.textContent = `Selected: ${selectedCheckboxes.length}`;
         }
 
         function bindCheckboxEvent(checkbox) {
-            checkbox.addEventListener('change', updateDeleteBtnState);
+            checkbox.addEventListener('change', () => {
+                const selectedCheckboxes = Array.from(document.querySelectorAll('.deleteCheckbox:checked'));
+                selectedCount.textContent = `Selected: ${selectedCheckboxes.length}`;
+
+                // Show or hide bottom nav based on selection
+                if (selectedCheckboxes.length > 0) {
+                    bottomNav.style.visibility = 'visible';
+                } else {
+                    bottomNav.style.visibility = 'hidden';
+                }
+
+                deleteBtn.style.visibility = selectedCheckboxes.length > 0 ? 'visible' : 'hidden';
+            });
         }
 
         function bindPhotoClickEvent(photo) {

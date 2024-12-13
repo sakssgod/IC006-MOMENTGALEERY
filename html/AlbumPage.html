@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="topnav">
-        <a class="BackBtn">Back</a>
+        <a class="BackBtn" style="visibility: hidden;">Back</a>
         <span class="title">My Photo Album</span>
-        <a class="deleteBtn">Delete</a>
+        <a class="SelectAllBtn">Select All</a>
     </div>
 
     <div class="album-container">
@@ -21,33 +21,34 @@
         </div>
     </div>
     
-
-
-    
     <div class="dialog-overlay">
         <div class="dialog-box">
             <h3>Enter Album Name</h3>
             <input type="text" id="albumNameInput" placeholder="Enter album name" />
             <br />
-            <button class="btn-confirm">Confirm</button>
+            <button class="btn-confirm">Create</button>
             <button class="btn-cancel">Cancel</button>
         </div>
     </div>
 
-    <div class="delete-dialog-overlay" style="display: none;">
+    <div class="delete-dialog-overlay">
         <div class="dialog-box">
-            <h3>Are you sure you want to delete the following album(s)?</h3>
+            <h3 class="dialog-message">Are you sure you want to delete the</h3>
             <div class="album-list"></div>
             <br />
-            <button class="btn-delete-confirm">Confirm</button>
-            <button class="btn-delete-cancel">Cancel</button>
+            <button class="btn-delete-confirm">YES</button>
+            <button class="btn-delete-cancel">NO</button>
         </div>
+    </div>
+
+    <div class="bottomnav">
+        <span class="selected-count">Selected: 0</span>
+        <a class="deleteBtn">Delete</a>
     </div>
 
     <script>
         const albumContainer = document.querySelector('.album-container');
-        const deleteBtn = document.querySelector('.deleteBtn');
-        const BackBtn = document.querySelector('.BackBtn');
+        const SelectAllBtn = document.querySelector('.SelectAllBtn');
         const addAlbumButton = document.querySelector('.add-album');
         const dialogOverlay = document.querySelector('.dialog-overlay');
         const albumNameInput = document.querySelector('#albumNameInput');
@@ -57,18 +58,56 @@
         const deleteMessage = document.querySelector('.album-list');
         const btnConfirmDelete = document.querySelector('.btn-delete-confirm');
         const btnCancelDelete = document.querySelector('.btn-delete-cancel');
+        const bottomNavDeleteBtn = document.querySelector('.bottomnav .deleteBtn');
+        const selectedCount = document.querySelector('.bottomnav .selected-count');
+        const bottomNav = document.querySelector('.bottomnav');
 
-        deleteBtn.style.visibility = 'hidden';
-        BackBtn.style.visibility = 'hidden';
-
-        let albumCounter = JSON.parse(localStorage.getItem('albumNames'))?.length || 0;
+        let albumCounter = JSON.parse(localStorage.getItem('albumNamesFromHomepage'))?.length || 0;
 
         document.addEventListener('DOMContentLoaded', () => {
-            const albums = JSON.parse(localStorage.getItem('albumNames')) || [];
+            const albums = JSON.parse(localStorage.getItem('albumNamesFromHomepage')) || [];
             albums.forEach(album => {
-                createAlbumElement(album.id, album.name);
+                createAlbumElement(album);
             });
         });
+
+        SelectAllBtn.addEventListener('click', () => {
+            const allCheckboxes = document.querySelectorAll('.deleteCheckbox');
+            const isAllSelected = Array.from(allCheckboxes).every(checkbox => checkbox.checked);
+
+            allCheckboxes.forEach(checkbox => {
+                checkbox.checked = !isAllSelected;
+            });
+
+            const selectedCheckboxes = Array.from(allCheckboxes).filter(cb => cb.checked);
+            const selectedCountText = selectedCheckboxes.length;
+            selectedCount.textContent = `Selected: ${selectedCountText}`;
+
+            // If there are selected items, make bottomnav visible, else hide it
+            if (selectedCheckboxes.length > 0) {
+                bottomNav.style.visibility = 'visible'; // Show bottom nav
+            } else {
+                bottomNav.style.visibility = 'hidden'; // Hide bottom nav
+            }
+
+            bottomNavDeleteBtn.style.visibility = selectedCheckboxes.length > 0 ? 'visible' : 'hidden';
+        });
+
+        function bindCheckboxEvent(checkbox) {
+            checkbox.addEventListener('change', () => {
+                const selectedCheckboxes = Array.from(document.querySelectorAll('.deleteCheckbox:checked'));
+                selectedCount.textContent = `Selected: ${selectedCheckboxes.length}`;
+
+                // Show or hide bottom nav based on selection
+                if (selectedCheckboxes.length > 0) {
+                    bottomNav.style.visibility = 'visible';
+                } else {
+                    bottomNav.style.visibility = 'hidden';
+                }
+
+                bottomNavDeleteBtn.style.visibility = selectedCheckboxes.length > 0 ? 'visible' : 'hidden';
+            });
+        }
 
         addAlbumButton.addEventListener('click', () => {
             dialogOverlay.style.display = 'flex';
@@ -83,18 +122,16 @@
                 return;
             }
 
-            const existingAlbums = JSON.parse(localStorage.getItem('albumNames')) || [];
+            const existingAlbums = JSON.parse(localStorage.getItem('albumNamesFromHomepage')) || [];
             if (existingAlbums.some(album => album.name === albumName)) {
                 alert("An album with this name already exists.");
                 return;
             }
 
-            albumCounter++;
-            const newAlbum = { id: albumCounter, name: albumName};
-            createAlbumElement(newAlbum.id, newAlbum.name);
+            createAlbumElement(albumName);
 
-            existingAlbums.push(newAlbum);
-            localStorage.setItem('albumNames', JSON.stringify(existingAlbums));
+            existingAlbums.push(albumName);
+            localStorage.setItem('albumNamesFromHomepage', JSON.stringify(existingAlbums));
 
             dialogOverlay.style.display = 'none';
         });
@@ -103,10 +140,10 @@
             dialogOverlay.style.display = 'none';
         });
 
-        function createAlbumElement(albumId, albumName) {
+        function createAlbumElement(albumName) {
             const newAlbum = document.createElement('div');
             newAlbum.classList.add('album-item');
-            newAlbum.setAttribute('data-album-id', albumId);
+            newAlbum.setAttribute('data-album-name', albumName);
             newAlbum.innerHTML = `
                 <input type="checkbox" class="deleteCheckbox">
                 <div class="icon album">&#xe600;</div>
@@ -116,79 +153,76 @@
 
             newAlbum.addEventListener('click', (event) => {
                 if (event.target.classList.contains('deleteCheckbox')) return;
-                window.location.href = `InsideAlbum.html?albumId=${albumId}&albumName=${encodeURIComponent(albumName)}`;
+                window.location.href = `InsideAlbum.html?albumName=${encodeURIComponent(albumName)}`;
             });
 
             const newCheckbox = newAlbum.querySelector('.deleteCheckbox');
             bindCheckboxEvent(newCheckbox);
         }
 
-        function bindCheckboxEvent(checkbox) {
-            checkbox.addEventListener('change', () => {
-                const anyChecked = Array.from(document.querySelectorAll('.deleteCheckbox')).some(cb => cb.checked);
-                deleteBtn.style.visibility = anyChecked ? 'visible' : 'hidden';
-            });
-        }
-
-        deleteBtn.addEventListener('click', () => {
+        bottomNavDeleteBtn.addEventListener('click', () => {
             const selectedAlbums = document.querySelectorAll('.deleteCheckbox:checked');
             if (selectedAlbums.length === 0) return;
 
-            const albumNames = Array.from(selectedAlbums).map(checkbox => {
-                const albumItem = checkbox.closest('.album-item');
-                return albumItem.querySelector('.album-name').textContent;
-            });
+            const allCheckboxes = document.querySelectorAll('.deleteCheckbox');
+            const isAllSelected = selectedAlbums.length === allCheckboxes.length; // Exclude "Create New Album"
+            const dialogMessage = document.querySelector('.dialog-message');
 
-            deleteMessage.innerHTML = ''; 
-            albumNames.forEach(name => {
-                const div = document.createElement('div');
-                div.textContent = name;
-                deleteMessage.appendChild(div);
-            });
-            
+            // Update delete dialog message
+            deleteMessage.innerHTML = '';
+            if (isAllSelected && selectedAlbums.length > 1) {
+                dialogMessage.textContent = 'Are you sure you want to delete all albums?';
+            } else {
+                dialogMessage.textContent = 'Are you sure you want to delete the selected albums?';
+                const albumNames = Array.from(selectedAlbums).map(checkbox => {
+                    const albumItem = checkbox.closest('.album-item');
+                    return albumItem.querySelector('.album-name').textContent;
+                });
+
+                albumNames.forEach(name => {
+                    const div = document.createElement('div');
+                    div.textContent = name;
+                    deleteMessage.appendChild(div);
+                });
+            }
+
+            // Show delete dialog
             deleteDialogOverlay.style.display = 'flex';
         });
 
         btnConfirmDelete.addEventListener('click', () => {
             const selectedAlbums = document.querySelectorAll('.deleteCheckbox:checked');
-            let albums = JSON.parse(localStorage.getItem('albumNames')) || [];
+            if (selectedAlbums.length === 0) return;
+
+            let albums = JSON.parse(localStorage.getItem('albumNamesFromHomepage')) || [];
             let trash = JSON.parse(localStorage.getItem('trash')) || [];
-
-            const albumsToDelete = Array.from(selectedAlbums).map(checkbox => {
-                const albumItem = checkbox.closest('.album-item');
-                const albumId = Number(albumItem.getAttribute('data-album-id'));
-                const album = albums.find(a => a.id === albumId);
-                return album ? { id: albumId, name: album.name } : null;
-            }).filter(Boolean);
-
-            albumsToDelete.forEach(album => {
-                const photos = JSON.parse(localStorage.getItem(album.name)) || [];
-                trash.push({ id: album.id, name: album.name, photos });
-                localStorage.removeItem(album.name);
-            });
-
-            localStorage.setItem('trash', JSON.stringify(trash));
-            albums = albums.filter(a => !albumsToDelete.some(toDelete => toDelete.id === a.id));
-            localStorage.setItem('albumNames', JSON.stringify(albums));
 
             selectedAlbums.forEach(checkbox => {
                 const albumItem = checkbox.closest('.album-item');
-                albumItem.remove();
+                const albumName = albumItem.getAttribute('data-album-name');
+
+                // 移动到垃圾桶
+                trash.push(albumName);
+                albums = albums.filter(a => a !== albumName); // 删除目标相册
+                albumItem.remove(); // 从 DOM 中移除
             });
 
+            localStorage.setItem('albumNamesFromHomepage', JSON.stringify(albums));
+            localStorage.setItem('trash', JSON.stringify(trash));
+
             deleteDialogOverlay.style.display = 'none';
-            deleteBtn.style.visibility = 'hidden';
+            bottomNav.style.visibility = 'hidden'; // 隐藏底部导航
+            bottomNavDeleteBtn.style.visibility = 'hidden';
         });
+
 
         btnCancelDelete.addEventListener('click', () => {
             deleteDialogOverlay.style.display = 'none';
         });
-
-
-
-
-
+        
+        function updateDialogMessage(message) {
+            dialogMessage.textContent = message;
+        }
     </script>
-    <script src="../scripts/CriarAlbumName.js"></script>
 </body>
 </html>
