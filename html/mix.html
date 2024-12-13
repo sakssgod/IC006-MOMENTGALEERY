@@ -42,8 +42,23 @@
                 }
             }
         });
+
+        window.addEventListener("message", (event) => {
+            if (event.data && event.data.targetIframe && event.data.newSrc) {
+                const iframe = document.querySelector(`iframe[name="${event.data.targetIframe}"]`);
+                if (iframe) {
+                    iframe.src = event.data.newSrc; // 更新 iframe 的 src 属性
+                } else {
+                    console.error(`Iframe with name ${event.data.targetIframe} not found.`);
+                }
+            }
+        });
+
         
     </script>
+
+    <script src="HomePage.html"></script>
+    <script src="ImportPhotosPage.html"></script>
     
     
 </body>

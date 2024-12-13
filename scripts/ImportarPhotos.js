@@ -99,10 +99,10 @@ function openFileExplorer() {
 }
 
 // 关闭文件浏览器并隐藏遮罩
-function closeFileExplorer() {
-    fileExplorer.style.display = 'none'; // 隐藏文件浏览器
-    overlay.style.display = 'none'; // 隐藏遮罩
-}
+// function closeFileExplorer() {
+//     fileExplorer.style.display = 'none'; // 隐藏文件浏览器
+//     overlay.style.display = 'none'; // 隐藏遮罩
+// }
 
 // 阻止点击文件浏览器内容时关闭
 fileExplorer.addEventListener('click', (event) => {
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteIcon.classList.add("iconfont", "icon-lajixiang"); // 使用自定义或外部图标字体类
         deleteIcon.style.color = "red";
         deleteIcon.addEventListener("click", () => {
-            alert(`Deleted: ${photo.description}`);
+            showCustomAlert(`Your "${photo.description}" photo has been successfully deleted!`);
         });
 
         // 添加收藏图标
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
         favoriteIcon.classList.add("iconfont", "icon-shoucangxiao"); // 使用自定义或外部图标字体类
         favoriteIcon.style.color = "orange";
         favoriteIcon.addEventListener("click", () => {
-            alert(`Favorited: ${photo.description}`);
+            showCustomAlert(`Your "${photo.description}" photo has been successfully favorited!`);
         });
 
         
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
         shareIcon.classList.add("iconfont", "icon-pengyouquan"); // 使用自定义或外部图标字体类
         shareIcon.style.color = "blue";
         shareIcon.addEventListener("click", () => {
-            alert(`Shared: ${photo.description}`);
+            showCustomAlert(`Your "${photo.description}" photo has been successfully shared!`);
         });
 
         // 将图标添加到图标区域
@@ -412,5 +412,80 @@ function toggleSelectAll(event) {
         selectAllButton.textContent = 'Deselect All'; // 改变按钮文字
         isAllSelected = true;
     }
+}
+
+
+
+
+
+const deleteDialogOverlay = document.getElementById('deleteDialogOverlay');
+let pendingCloseAction = null;
+
+// 显示确认对话框
+function showCloseDialog(action) {
+    deleteDialogOverlay.style.display = 'flex';
+    pendingCloseAction = action;
+}
+
+// 确认关闭
+function confirmClose() {
+    if (typeof pendingCloseAction === 'function') {
+        pendingCloseAction(); // 执行待定操作
+    }
+    closeDialog(); // 关闭对话框
+}
+
+
+
+// 取消关闭
+function cancelClose() {
+    closeDialog(); // 仅关闭对话框
+}
+
+// 关闭对话框
+function closeDialog() {
+    deleteDialogOverlay.style.display = 'none';
+    pendingCloseAction = null;
+}
+
+// 修改关闭文件管理器的逻辑
+function closeFileExplorer(origin) {
+    if (origin === 'openButton') {
+        // 如果是通过 Open 按钮触发，不显示确认对话框，直接关闭
+        fileExplorer.style.display = 'none';
+        overlay.style.display = 'none';
+    } else {
+        // 否则显示确认对话框
+        showCloseDialog(() => {
+            fileExplorer.style.display = 'none';
+            overlay.style.display = 'none';
+        });
+    }
+}
+
+
+// 在 DOM 加载后绑定事件
+document.addEventListener("DOMContentLoaded", () => {
+
+});
+
+
+
+function showCustomAlert(message) {
+    const customAlert = document.getElementById('customAlert');
+    const customOverlay = document.getElementById('customOverlay');
+    const customAlertText = document.getElementById('customAlertText');
+
+    customAlertText.textContent = message; // 设置提示信息
+    customOverlay.style.display = 'block'; // 显示背景变暗的遮罩
+    customAlert.style.display = 'flex'; // 显示提示窗口
+}
+
+function closeCustomAlert() {
+    const customAlert = document.getElementById('customAlert');
+    const customOverlay = document.getElementById('customOverlay');
+
+    customOverlay.style.display = 'none'; // 隐藏遮罩
+    customAlert.style.display = 'none'; // 隐藏提示窗口
 }
 

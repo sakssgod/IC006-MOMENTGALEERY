@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             {
                 name: "Ayi Li",
-                userpic: "https://pic3.zhimg.com/v2-d1928d1a4e0d849f7c6c49428d2e0411_r.jpg",
+                userpic: "../婚纱照片/casamento.jpg",
                 content: "Another day of my life :D",
                 picUrl: ["https://img.zcool.cn/community/0195cf55792ace00000059ff8e3f7b.jpg"],
                 time: "13 mins ago",
@@ -202,6 +202,17 @@ document.addEventListener("DOMContentLoaded", () => {
         popupWindow.classList.remove('active');
         overlay.classList.remove('active');
     });
+
+    function closePopup() {
+        const popupWindow = document.querySelector('.popup-window');
+        const overlay = document.querySelector('.overlay');
+        popupWindow.classList.remove('active'); // 隐藏弹窗
+        overlay.classList.remove('active'); // 隐藏遮罩
+    }
+    
+    // 为取消按钮绑定事件（如果需要）
+    document.querySelector('.cancel-button').addEventListener('click', closePopup);
+    
 });
 
 

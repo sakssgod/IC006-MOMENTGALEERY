@@ -143,8 +143,8 @@ main{
 
 /* Linux File Explorer Mockup */
 .file-explorer {
-    width: 900px;
-    height: 900px;
+    width: 700px;
+    height: 600px;
     background-color: #222;
     border-radius: 10px;
     overflow: hidden;
@@ -204,7 +204,7 @@ main{
 
 .outer-file {
     width: 100%;
-    height: 100%;
+    height: 85%;
 }
 
 .file-list {
@@ -714,4 +714,113 @@ main{
 
 .help-button:hover {
     background-color: #0056b3; 
+}
+
+
+.delete-dialog-overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.dialog-box {
+    background-color: white;
+    width: 300px;
+    height: 100px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.dialog-box h3 {
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-delete-confirm, .btn-delete-cancel {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-delete-confirm {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-delete-cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+
+.custom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明黑色背景 */
+    z-index: 1999; /* 确保在内容下但高于页面 */
+    display: none; /* 默认隐藏 */
+}
+
+.custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 150px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.custom-alert-box {
+    text-align: center;
+    gap: 30px;
+    
+    
+}
+
+.custom-alert-box p {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.custom-alert-box button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 30px;
+    width: 70px;
+}
+
+.custom-alert-box button:hover {
+    background-color: #0056b3;
 }

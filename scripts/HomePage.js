@@ -32,14 +32,12 @@ modeSwitch.addEventListener("click", () => {
 
 document.querySelectorAll('.nav-link a').forEach(link => {
     link.addEventListener('click', function(event) {
-        event.preventDefault();
-        const targetPage = link.getAttribute('data-target');
+        event.preventDefault(); // 阻止默认链接行为
+        const targetPage = link.getAttribute('data-target'); // 获取目标路径
         if (targetPage) {
-            // 获取主内容区域的 iframe 并更改其 src 属性
-            const mainContentIframe = window.parent.document.querySelector('.main-content iframe');
-            if (mainContentIframe) {
-                mainContentIframe.src = targetPage;
-            }
+            // 向父窗口发送消息，通知更新 iframe 路径
+            window.parent.postMessage({ targetIframe: "f2", newSrc: targetPage }, "*");
         }
     });
 });
+

@@ -28,7 +28,7 @@
 
                     <div class="upload-button-group">
                         <button class="dropdown-arrow" onclick="toggleDropdown(event)">
-                            UPDATE<i class="iconfont icon-arrow-down toggle"></i>
+                            Import Photo<i class="iconfont icon-arrow-down toggle"></i>
                         </button>
                 
                         <div class="dropdown-menu" id="dropdownMenu">
@@ -61,10 +61,25 @@
         </section>
     </main>
 
-
-
+    <div id="customOverlay" class="custom-overlay" style="display: none;"></div>
+    <div id="customAlert" class="custom-alert" style="display: none;">
+        <div class="custom-alert-box">
+            <p id="customAlertText">Action completed.</p>
+            <button onclick="closeCustomAlert()">OK</button>
+        </div>
+    </div>
+    
     <div id="overlay" class="overlay" onclick="closeFileExplorer()"></div>
-
+    <div class="delete-dialog-overlay" id="deleteDialogOverlay" style="display: none;">
+        <div class="dialog-box">
+            <h3>Are you sure you want to close?</h3>
+            <div class="button-group">
+                <button class="btn-delete-confirm" onclick="confirmClose()">Confirm</button>
+                <button class="btn-delete-cancel" onclick="cancelClose()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
     <div class="file-explorer" id="fileExplorer">
         <!-- Top Navigation Bar -->
         <div class="top-bar" style="padding-left: 20px; margin: 20px; border-radius: 20px;" >
@@ -91,7 +106,7 @@
                 <div class="bottom-open-cancele">
                     <div id="selectAllButton" class="bottom-button">Select All</div>
                     <div class="right-buttons">
-                        <button id="openButton" class="bottom-button" onclick="closeFileExplorer()">Open</button>
+                        <button id="openButton" class="bottom-button" onclick="closeFileExplorer('openButton')">Import</button>
                         <button id="cancelButton" class="bottom-button" onclick="closeFileExplorer()">Cancel</button>
                     </div>
                 </div>
@@ -102,7 +117,7 @@
     
 
 
-    <div id="iframeContainer" style="display: none; position: fixed; top: 10%; left: 10%; width: auto; height: auto; border: 1px solid #ddd; border-radius: 10px; background-color: white; z-index: 1000;" scrolling="no">
+    <div id="iframeContainer" style="display: none; position: absolute; top: 10%; left: 10%; width: auto; height: auto; border: 1px solid #ddd; border-radius: 10px; background-color: white; z-index: 1000;" scrolling="no">
         <iframe id="criteriosIframe" src="" style="min-width:870px; min-height: 570px; border: none;" scrolling="no"></iframe>
     </div>
     
